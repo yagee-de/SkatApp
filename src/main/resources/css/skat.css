@@ -5,7 +5,8 @@
 
 @IMPORT url("ios-theme/ios_inspired/styles.css");
 
-@IMPORT url("font-awesome/jqm-icon-pack-2.1.2-fa.css");
+/* Until I resolve license issues */ 
+/* @IMPORT url("font-awesome/jqm-icon-pack-2.1.2-fa.css"); */
 
 #removeGames {
 	display: none;

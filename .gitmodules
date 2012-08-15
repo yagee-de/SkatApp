@@ -1,0 +1,3 @@
+[submodule "src/main/resources/css/ios-theme"]
+	path = src/main/resources/css/ios-theme
+	url = https://github.com/taitems/iOS-Inspired-jQuery-Mobile-Theme.git
