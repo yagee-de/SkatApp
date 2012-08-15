@@ -1,0 +1,60 @@
+@CHARSET "UTF-8";
+
+@IMPORT
+	url("http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css");
+
+@IMPORT url("ios-theme/ios_inspired/styles.css");
+
+@IMPORT url("font-awesome/jqm-icon-pack-2.1.2-fa.css");
+
+#removeGames {
+	display: none;
+}
+
+#removeGames.ui-page-active {
+	display: block;
+}
+
+.ui-dialog .ui-content{
+	color: #fff;
+}
+.green {
+    background: -moz-linear-gradient(center top , #7BBF81 0%, #31AB3B 49%, #009E0F 50%, #009A0C 100%) repeat scroll 0 0 transparent;
+}
+li.lost {
+	background: #fff2eb;
+	background: -moz-linear-gradient(top, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%, #fee5d8
+		100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fff2eb),
+		color-stop(50%, #fcddcc), color-stop(51%, #fdd5bf),
+		color-stop(100%, #fee5d8) );
+	background: -webkit-linear-gradient(top, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%,
+		#fee5d8 100%);
+	background: -o-linear-gradient(top, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%, #fee5d8
+		100%);
+	background: -ms-linear-gradient(top, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%, #fee5d8
+		100%);
+	background: linear-gradient(to bottom, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%, #fee5d8
+		100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(    startColorstr='#fff2eb',
+		endColorstr='#fee5d8', GradientType=0 );
+}
+
+li.won {
+	background: #f1ffeb;
+	background: -moz-linear-gradient(top, #f1ffeb 0%, #dbfccc 50%, #d2fdbf 51%, #e3fed8
+		100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f1ffeb),
+		color-stop(50%, #dbfccc), color-stop(51%, #d2fdbf),
+		color-stop(100%, #e3fed8) );
+	background: -webkit-linear-gradient(top, #f1ffeb 0%, #dbfccc 50%, #d2fdbf 51%,
+		#e3fed8 100%);
+	background: -o-linear-gradient(top, #f1ffeb 0%, #dbfccc 50%, #d2fdbf 51%, #e3fed8
+		100%);
+	background: -ms-linear-gradient(top, #f1ffeb 0%, #dbfccc 50%, #d2fdbf 51%, #e3fed8
+		100%);
+	background: linear-gradient(to bottom, #f1ffeb 0%, #dbfccc 50%, #d2fdbf 51%, #e3fed8
+		100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(   startColorstr='#f1ffeb',
+		endColorstr='#e3fed8', GradientType=0 );
+}

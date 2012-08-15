@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html manifest="skat.manifest">
+<head>
+<title>SkatApp</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="retina.png" sizes="114x114" rel="apple-touch-icon">
+<link rel="apple-touch-startup-image" href="retina-startup.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="skat.css" />
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+<script type="text/javascript" src="skat.js"></script>
+</head>
+<body>
+  <div id="settingsPage" data-role="page" data-dom-cache="true">
+    <div data-role="header" data-theme="a">
+      <a data-role="button" data-icon="back" data-prefetch data-rel="back" href="index.html">zurück</a>
+      <h1>Spiele anzeigen</h1>
+    </div>
+    <!-- /header -->
+
+    <div data-role="content">
+
+      <div data-role="collapsible-set">
+
+        <div data-role="collapsible" data-collapsed="false">
+          <h3>Einstellungen</h3>
+          <div data-role="fieldcontain">
+            <label for="dbURL"> SkatDB URL: </label> <input type="text" name="dbURL" id="dbURL" />
+          </div>
+          <button onclick="skat.setDbURL(jQuery('#dbURL').val());alert('Einstellungen gespeichert.');">Speichern</button>
+          <ul id="playerList" data-role="listview" data-inset="true">
+            <li data-role="list-divider">Spieler</li>
+            <li data-icon="plus"><a href="addPlayer.html" data-rel="dialog" data-transition>Hinzufügen</a></li>
+            <li class="player">Mewel</li>
+          </ul>
+          <ul id="groupList" data-role="listview" data-inset="true">
+            <li data-role="list-divider">Skatrunden</li>
+            <li data-icon="plus"><a href="addGroup.html" data-rel="dialog" data-transition>Hinzufügen</a></li>
+            <li class="group">Mittagstisch</li>
+          </ul>
+        </div>
+
+        <div data-role="collapsible">
+          <h3>Löschen</h3>
+          <p>
+            <a href="removeGames.html?v=1" data-role="button" data-rel="dialog" data-transition="slideup">Spiele
+              Löschen</a> <a href="clearStorage.html?v=1" data-role="button" data-rel="dialog">localStorage Löschen</a>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /page -->
+</body>
+</html>

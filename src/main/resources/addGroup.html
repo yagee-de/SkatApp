@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Alle Spiele Löschen?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="skat.css" />
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+<script type="text/javascript" src="skat.js"></script>
+</head>
+<body>
+  <div id="addGroup" data-role="dialog" data-theme="a" data-dom-cache="true">
+    <div data-role="content">
+      <h1>Gruppe hinzufügen</h1>
+          <div data-role="fieldcontain">
+            <label for="groupName"> Name: </label> <input type="text" data-theme="b" name="groupName" id="groupName" />
+          </div>
+      <a data-role="button" data-theme="d" onclick="skat.addGroup(jQuery('#groupName').val());jQuery('#addGroup').dialog('close')">Klingt gut</a>
+      <a data-role="button" data-theme="e" onclick="jQuery('#addGroup').dialog('close')">Abbrechen</a>
+    </div>
+  </div>
+</body>
+</html>

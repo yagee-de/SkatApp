@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html manifest="skat.manifest">
+<head>
+<title>Alle Daten Löschen?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="skat.css" />
+<script src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
+<script type="text/javascript" src="skat.js"></script>
+</head>
+<body>
+  <div id="clearStorage" data-role="dialog" data-theme="a" data-dom-cache="true">
+    <div data-role="content">
+      <h1>Wirklich alle lokalen Daten löschen?</h1>
+      <p>Es werden alle Einstellungen und Spiele gelöscht.</p>
+      <a data-role="button" data-theme="d" onclick="skat.clearStorage();jQuery('#clearStorage').dialog('close')">Klingt gut</a>
+      <a data-role="button" data-theme="e" onclick="jQuery('#clearStorage').dialog('close')">Abbrechen</a>
+    </div>
+  </div>
+</body>
+</html>
