@@ -1,12 +1,12 @@
 @CHARSET "UTF-8";
 
-@IMPORT
-	url("http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css");
+@IMPORT url("jquery.mobile-1.1.0.css");
 
 @IMPORT url("ios-theme/ios_inspired/styles.css");
 
-/* Until I resolve license issues */ 
-/* @IMPORT url("font-awesome/jqm-icon-pack-2.1.2-fa.css"); */
+* /
+	/* Until I resolve license issues */
+	/* @IMPORT url("font-awesome/jqm-icon-pack-2.1.2-fa.css"); */ 
 
 #removeGames {
 	display: none;
@@ -16,12 +16,15 @@
 	display: block;
 }
 
-.ui-dialog .ui-content{
+.ui-dialog .ui-content {
 	color: #fff;
 }
+
 .green {
-    background: -moz-linear-gradient(center top , #7BBF81 0%, #31AB3B 49%, #009E0F 50%, #009A0C 100%) repeat scroll 0 0 transparent;
+	background: -moz-linear-gradient(center top, #7BBF81 0%, #31AB3B 49%, #009E0F 50%,
+		#009A0C 100%) repeat scroll 0 0 transparent;
 }
+
 li.lost {
 	background: #fff2eb;
 	background: -moz-linear-gradient(top, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%, #fee5d8
@@ -37,7 +40,7 @@ li.lost {
 		100%);
 	background: linear-gradient(to bottom, #fff2eb 0%, #fcddcc 50%, #fdd5bf 51%, #fee5d8
 		100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(    startColorstr='#fff2eb',
+	filter: progid:DXImageTransform.Microsoft.gradient(     startColorstr='#fff2eb',
 		endColorstr='#fee5d8', GradientType=0 );
 }
 
@@ -56,6 +59,6 @@ li.won {
 		100%);
 	background: linear-gradient(to bottom, #f1ffeb 0%, #dbfccc 50%, #d2fdbf 51%, #e3fed8
 		100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(   startColorstr='#f1ffeb',
+	filter: progid:DXImageTransform.Microsoft.gradient(    startColorstr='#f1ffeb',
 		endColorstr='#e3fed8', GradientType=0 );
 }

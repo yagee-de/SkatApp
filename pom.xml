@@ -12,6 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jetty.version>7.6.3.v20120416</jetty.version>
   </properties>
 
   <licenses>
@@ -59,6 +60,7 @@
           <exclude>**/.gitignore</exclude>
           <exclude>**/README.md</exclude>
           <exclude>**/*.psd</exclude>
+          <exclude>css/skat.css</exclude>
         </excludes>
       </resource>
       <resource>
@@ -145,7 +147,7 @@
             <configuration>
               <artifacts>
                 <artifact>
-                  <file>target/min/classes/1.js</file>
+                  <file>target/min/classes/${project.artifactId}-${project.version}.js</file>
                   <type>js</type>
                 </artifact>
               </artifacts>
@@ -172,10 +174,33 @@
         <version>1.0.1</version>
         <executions>
           <execution>
-            <phase>process-resources</phase>
             <goals>
               <goal>import-js</goal>
               <goal>generate-html</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>maven-minify-plugin</artifactId>
+        <version>1.3.1</version>
+        <executions>
+          <execution>
+            <id>default-minify</id>
+            <phase>compile</phase>
+            <configuration>
+              <verbose>true</verbose>
+              <webappSourceDir>${project.build.directory}/min/classes</webappSourceDir>
+              <webappTargetDir>${project.build.directory}/min/classes</webappTargetDir>
+              <cssSourceDir>css</cssSourceDir>
+              <cssSourceFiles>
+                <cssSourceFile>webapp.css</cssSourceFile>
+              </cssSourceFiles>
+              <cssFinalFile>skat.css</cssFinalFile>
+            </configuration>
+            <goals>
+              <goal>minify</goal>
             </goals>
           </execution>
         </executions>
@@ -257,7 +282,10 @@
                 <include>images/**</include>
               </includes>
               <excludes>
-                <include>*.manifest</include>
+                <exclude>*.manifest</exclude>
+                <exclude>css/skat.css</exclude>
+                <exclude>css/jquery.mobile.*</exclude>
+                <exclude>css/webapp.css</exclude>
               </excludes>
             </fileSet>
           </realResources>
@@ -266,6 +294,26 @@
           </networkResources>
           <fallback>/ /offline.html</fallback>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>jetty-maven-plugin</artifactId>
+        <version>${jetty.version}</version>
+        <configuration>
+          <webAppSourceDirectory>${project.build.directory}/min/classes</webAppSourceDirectory>
+          <systemProperties>
+            <systemProperty>
+              <name>com.sun.management.jmxremote</name>
+            </systemProperty>
+          </systemProperties>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlets</artifactId>
+            <version>${jetty.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
@@ -286,7 +334,6 @@
         <reportSets>
           <reportSet>
             <reports>  
-                  <!-- include the desired reports -->
               <report>jslint</report>
               <report>jsdoc</report>
             </reports>
