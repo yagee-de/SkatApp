@@ -52,13 +52,20 @@
   </dependencies>
 
   <build>
-    <extensions>
-      <extension>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>javascript-maven-plugin</artifactId>
-        <version>2.0.0-alpha-1</version>
-      </extension>
-    </extensions>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>**/.gitignore</exclude>
+          <exclude>**/README.md</exclude>
+          <exclude>**/*.psd</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/js</directory>
+        <targetPath>js</targetPath>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <groupId>com.github.github</groupId>
@@ -143,11 +150,24 @@
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jslint-maven-plugin</artifactId>
+        <version>1.0.1</version>
+        <executions>
+          <execution>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>jslint</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
         <artifactId>js-import-maven-plugin</artifactId>
         <version>1.0.1</version>
         <executions>
           <execution>
-            <phase>prepare-package</phase>
+            <phase>process-resources</phase>
             <goals>
               <goal>import-js</goal>
               <goal>generate-html</goal>
@@ -161,13 +181,14 @@
         <version>1.0.1</version>
         <executions>
           <execution>
-            <phase>package</phase>
+            <phase>process-resources</phase>
             <goals>
               <goal>minify-js</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
+          <splitDependencies>false</splitDependencies>
           <jsSplitPoints>
             <property>
               <name>js/skat.js</name>
@@ -181,7 +202,7 @@
         <version>2.5</version>
         <executions>
           <execution>
-            <phase>prepare-package</phase>
+            <phase>generate-resources</phase>
             <goals>
               <goal>resources</goal>
             </goals>
@@ -203,6 +224,43 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.evolvis.maven.plugin</groupId>
+        <artifactId>maven-html5manifest-plugin</artifactId>
+        <version>1.0.1</version>
+        <executions>
+          <execution>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>generate-manifest</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <outputManifestPath>${project.build.directory}/min/classes/skat.manifest</outputManifestPath>
+          <!-- TODO: add timestamp to manifestVersion  -->
+          <manifestVersion>${project.version}</manifestVersion>
+          <realResources>
+            <fileSet>
+              <directory>${project.build.directory}/min/classes</directory>
+              <includes>
+                <include>**/*-min.js</include>
+                <include>*.html</include>
+                <include>css/**</include>
+                <include>img/**</include>
+                <include>images/**</include>
+              </includes>
+              <excludes>
+                <include>*.manifest</include>
+              </excludes>
+            </fileSet>
+          </realResources>
+          <networkResources>
+            <string>*</string>
+          </networkResources>
+          <fallback>/ /offline.html</fallback>
+        </configuration>
       </plugin>
     </plugins>
   </build>
@@ -229,6 +287,14 @@
       </releases>
       <snapshots>
         <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+    <pluginRepository>
+      <id>evolvis-repository</id>
+      <name>evolvis Maven2 Repository</name>
+      <url>http://maven-repo.evolvis.org/releases</url>
+      <snapshots>
+        <enabled>false</enabled>
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
