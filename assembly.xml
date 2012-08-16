@@ -1,0 +1,21 @@
+<assembly>
+  <id>www</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <fileSets>
+    <fileSet>
+      <directory>${project.build.directory}/min/classes</directory>
+      <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>/${project.artifactId}-${project.version}.js</include>
+        <include>/${project.artifactId}-${project.version}-min.js</include>
+        <include>*.html</include>
+        <include>*.manifest</include>
+        <include>/css/**</include>
+        <include>/img/**</include>
+        <include>/images/**</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</assembly>
