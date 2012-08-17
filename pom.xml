@@ -295,8 +295,8 @@
               <directory>${project.build.directory}/classes</directory>
               <preservePath>true</preservePath>
               <includes>
-                <include>js/skat*.js</include>
-                <include>css/skat*.css</include>
+                <include>js/skat${combined.filename.suffix}*.js</include>
+                <include>css/skat${combined.filename.suffix}*.css</include>
               </includes>
             </resource>
           </resources>
