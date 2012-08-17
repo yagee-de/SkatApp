@@ -1,0 +1,40 @@
+CACHE MANIFEST:
+
+# version: 0.1-SNAPSHOT
+
+# real resources entries
+addGroup.html
+addPlayer.html
+clearStorage.html
+css/images/arrow_right.png
+css/images/arrow_right@2x.png
+css/images/backButtonSprite.png
+css/images/backButtonSprite@2x.png
+css/images/iconSprite.png
+css/images/tabSprite.png
+css/images/tiling_stripes.gif
+css/skat-0.1-SNAPSHOT.min.css
+form.html
+games.html
+images/retina-ipad.png
+images/retina-startup.png
+images/retina.png
+images/startup.png
+img/ajax-loader.gif
+img/ajax-loader.png
+img/icons-18-black.png
+img/icons-18-white.png
+img/icons-36-black.png
+img/icons-36-white.png
+index.html
+js/skat-0.1-SNAPSHOT.min.js
+offline.html
+removeGames.html
+settings.html
+synchronize.html
+
+NETWORK:
+*
+
+FALLBACK:
+/ /offline.html
