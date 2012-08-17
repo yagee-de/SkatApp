@@ -266,42 +266,43 @@
             <goals>
               <goal>copy</goal>
             </goals>
+            <configuration>
+              <resources>
+                <resource>
+                  <mkdir>true</mkdir>
+                  <targetPath>${project.build.directory}/min/classes</targetPath>
+                  <directory>${project.build.directory}/classes</directory>
+                  <preservePath>true</preservePath>
+                  <excludes>
+                    <exclude>js/**</exclude>
+                    <exclude>css/*.css</exclude>
+                    <exclude>*.manifest</exclude>
+                    <exclude>*.html</exclude>
+                  </excludes>
+                </resource>
+                <resource>
+                  <targetPath>${project.build.directory}/min/classes</targetPath>
+                  <directory>${project.build.directory}/classes</directory>
+                  <preservePath>true</preservePath>
+                  <includes>
+                    <include>*.html</include>
+                  </includes>
+                  <filtering>true</filtering>
+                  <filterWithDollarOnly>true</filterWithDollarOnly>
+                </resource>
+                <resource>
+                  <targetPath>${project.build.directory}/min/classes</targetPath>
+                  <directory>${project.build.directory}/classes</directory>
+                  <preservePath>true</preservePath>
+                  <includes>
+                    <include>js/skat${combined.filename.suffix}*.js</include>
+                    <include>css/skat${combined.filename.suffix}*.css</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
           </execution>
         </executions>
-        <configuration>
-          <resources>
-            <resource>
-              <targetPath>${project.build.directory}/min/classes</targetPath>
-              <directory>${project.build.directory}/classes</directory>
-              <preservePath>true</preservePath>
-              <excludes>
-                <exclude>js/**</exclude>
-                <exclude>css/*.css</exclude>
-                <exclude>*.manifest</exclude>
-                <exclude>*.html</exclude>
-              </excludes>
-            </resource>
-            <resource>
-              <targetPath>${project.build.directory}/min/classes</targetPath>
-              <directory>${project.build.directory}/classes</directory>
-              <preservePath>true</preservePath>
-              <includes>
-                <include>*.html</include>
-              </includes>
-              <filtering>true</filtering>
-              <filterWithDollarOnly>true</filterWithDollarOnly>
-            </resource>
-            <resource>
-              <targetPath>${project.build.directory}/min/classes</targetPath>
-              <directory>${project.build.directory}/classes</directory>
-              <preservePath>true</preservePath>
-              <includes>
-                <include>js/skat${combined.filename.suffix}*.js</include>
-                <include>css/skat${combined.filename.suffix}*.css</include>
-              </includes>
-            </resource>
-          </resources>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.mortbay.jetty</groupId>
@@ -417,26 +418,27 @@
             <version>0.2.5</version>
             <executions>
               <execution>
-                <id>fill-min</id>
+                <id>app-to-site</id>
                 <phase>pre-site</phase>
                 <goals>
                   <goal>copy</goal>
                 </goals>
+                <configuration>
+                  <resources>
+                    <resource>
+                      <mkdir>true</mkdir>
+                      <directory>${project.build.directory}/min/classes</directory>
+                      <targetPath>${project.build.directory}/site/app</targetPath>
+                      <preservePath>true</preservePath>
+                      <excludes>
+                        <exclude>js/skat${combined.filename.suffix}.js</exclude>
+                        <exclude>css/skat${combined.filename.suffix}.css</exclude>
+                      </excludes>
+                    </resource>
+                  </resources>
+                </configuration>
               </execution>
             </executions>
-            <configuration>
-              <resources>
-                <resource>
-                  <directory>${project.build.directory}/min/classes</directory>
-                  <targetPath>${project.build.directory}/site/app</targetPath>
-                  <preservePath>true</preservePath>
-                  <excludes>
-                    <exclude>js/skat${combined.filename.suffix}.js</exclude>
-                    <exclude>css/skat${combined.filename.suffix}.css</exclude>
-                  </excludes>
-                </resource>
-              </resources>
-            </configuration>
           </plugin>
         </plugins>
       </build>
