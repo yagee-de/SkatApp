@@ -312,10 +312,8 @@
             <contextPath>/</contextPath>
             <resourceBases>
               <resourceBase>${project.build.directory}/min/classes</resourceBase>
-<!--               <resourceBase>src/main/webapp</resourceBase> -->
             </resourceBases>
           </webApp>
-<!--           <webAppSourceDirectory>${project.build.directory}/min/classes</webAppSourceDirectory> -->
           <systemProperties>
             <systemProperty>
               <name>com.sun.management.jmxremote</name>
@@ -383,7 +381,6 @@
             </executions>
             <configuration>
               <outputManifestPath>${project.build.directory}/min/classes/skat.manifest</outputManifestPath>
-              <!-- TODO: add timestamp to manifestVersion -->
               <manifestVersion>${project.version} on ${maven.build.timestamp}</manifestVersion>
               <realResources>
                 <fileSet>
