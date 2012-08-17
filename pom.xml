@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.yagee.skat</groupId>
   <artifactId>SkatApp</artifactId>
@@ -170,7 +169,7 @@
         <version>1.0.1</version>
         <executions>
           <execution>
-            <phase>process-resources</phase>
+            <phase>compile</phase>
             <goals>
               <goal>jslint</goal>
             </goals>
@@ -196,7 +195,7 @@
         <executions>
           <execution>
             <id>default-minify</id>
-            <phase>compile</phase>
+            <phase>process-resources</phase>
             <configuration>
               <verbose>false</verbose>
               <charset>${project.build.sourceEncoding}</charset>
@@ -262,7 +261,7 @@
         <executions>
           <execution>
             <id>fill-min</id>
-            <phase>process-classes</phase>
+            <phase>compile</phase>
             <goals>
               <goal>copy</goal>
             </goals>
@@ -309,7 +308,14 @@
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty.version}</version>
         <configuration>
-          <webAppSourceDirectory>${project.build.directory}/min/classes</webAppSourceDirectory>
+          <webApp>
+            <contextPath>/</contextPath>
+            <resourceBases>
+              <resourceBase>${project.build.directory}/min/classes</resourceBase>
+<!--               <resourceBase>src/main/webapp</resourceBase> -->
+            </resourceBases>
+          </webApp>
+<!--           <webAppSourceDirectory>${project.build.directory}/min/classes</webAppSourceDirectory> -->
           <systemProperties>
             <systemProperty>
               <name>com.sun.management.jmxremote</name>
@@ -369,7 +375,7 @@
             <version>1.0.1</version>
             <executions>
               <execution>
-                <phase>prepare-package</phase>
+                <phase>process-classes</phase>
                 <goals>
                   <goal>generate-manifest</goal>
                 </goals>
@@ -377,7 +383,7 @@
             </executions>
             <configuration>
               <outputManifestPath>${project.build.directory}/min/classes/skat.manifest</outputManifestPath>
-          <!-- TODO: add timestamp to manifestVersion  -->
+              <!-- TODO: add timestamp to manifestVersion -->
               <manifestVersion>${project.version} on ${maven.build.timestamp}</manifestVersion>
               <realResources>
                 <fileSet>
@@ -456,9 +462,9 @@
         <skat.js>js/skat${combined.filename.suffix}.js</skat.js>
       </properties>
     </profile>
-  </profiles> 
+  </profiles>
 
-	<!-- FIXME: Temporary declaration of Codehaus repos until this moves to Maven Central -->
+  <!-- FIXME: Temporary declaration of Codehaus repos until this moves to Maven Central -->
   <repositories>
     <repository>
       <id>snapshots</id>
