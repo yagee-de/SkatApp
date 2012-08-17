@@ -14,6 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jetty.version>7.6.3.v20120416</jetty.version>
     <combined.filename.suffix>-${project.version}</combined.filename.suffix>
+    <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ssZ</maven.build.timestamp.format>
   </properties>
 
   <licenses>
@@ -376,7 +377,7 @@
             <configuration>
               <outputManifestPath>${project.build.directory}/min/classes/skat.manifest</outputManifestPath>
           <!-- TODO: add timestamp to manifestVersion  -->
-              <manifestVersion>${project.version}</manifestVersion>
+              <manifestVersion>${project.version} on ${maven.build.timestamp}</manifestVersion>
               <realResources>
                 <fileSet>
                   <directory>${project.build.directory}/min/classes</directory>
