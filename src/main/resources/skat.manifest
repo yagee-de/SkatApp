@@ -1,50 +1,5 @@
 CACHE MANIFEST
 #Modified 2012-08-14T15:03
+#This file is overwritten by release-mode profile
 NETWORK:
 *
-FALLBACK:
-/ offline.html
-CACHE:
-addGroup.html
-addPlayer.html
-clearStorage.html
-form.html
-games.html
-index.html
-jqm-init.js
-removeGames.html
-retina-ipad.png
-retina.png
-retina-startup.png
-settings.html
-skat.css
-skat.js
-startup.png
-synchronize.html
-#framework related:
-http://code.jquery.com/jquery-1.8.0.min.js
-http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js
-http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css
-http://code.jquery.com/mobile/1.1.1/images/ajax-loader.gif
-ios-theme/ios_inspired/styles.css
-ios-theme/ios_inspired/images/backButtonSprite@2x.png
-ios-theme/ios_inspired/images/tabSprite.png
-ios-theme/ios_inspired/images/arrow_right.png
-ios-theme/ios_inspired/images/iconSprite.psd
-ios-theme/ios_inspired/images/arrow_right@2x.png
-ios-theme/ios_inspired/images/tiling_stripes.gif
-ios-theme/ios_inspired/images/backButtonSprite.png
-ios-theme/ios_inspired/images/iconSprite.png
-ios-theme/index.html
-font-awesome/font/fontawesome-webfont.ttf
-font-awesome/font/fontawesome-webfont.svg
-font-awesome/font/fontawesome-webfont.woff
-font-awesome/font/fontawesome-webfont.eot
-font-awesome/images/icons-18-white-pack.png
-font-awesome/images/icons-18-black-pack.png
-font-awesome/images/icons-36-white-pack.png
-font-awesome/images/ajax-loader.png
-font-awesome/images/icons-36-black-pack.png
-font-awesome/faicons-v2.png
-font-awesome/faicons.png
-font-awesome/jqm-icon-pack-2.1.2-fa.css

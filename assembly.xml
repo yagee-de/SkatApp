@@ -7,15 +7,10 @@
     <fileSet>
       <directory>${project.build.directory}/min/classes</directory>
       <outputDirectory>/</outputDirectory>
-      <includes>
-        <include>/${project.artifactId}-${project.version}.js</include>
-        <include>/${project.artifactId}-${project.version}-min.js</include>
-        <include>*.html</include>
-        <include>*.manifest</include>
-        <include>/css/**</include>
-        <include>/img/**</include>
-        <include>/images/**</include>
-      </includes>
+      <excludes>
+        <exclude>css/skat${combined.filename.suffix}.css</exclude>
+        <exclude>js/skat${combined.filename.suffix}.js</exclude>
+      </excludes>
     </fileSet>
   </fileSets>
 </assembly>

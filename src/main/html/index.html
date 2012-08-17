@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!DOCTYPE html>
 <html manifest="skat.manifest">
 <head>
@@ -12,17 +11,25 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="blue">
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/skat.min.css" />
+<link rel="stylesheet" href="${skat.css}" />
 <script type="text/javascript" src="${skat.js}"></script>
 </head>
 <body>
   <div data-role="page" data-dom-cache="true">
     <div data-role="header" data-theme="a">
-      <h1>Offline</h1>
+      <h1>SkatApp</h1>
     </div>
     <!-- /header -->
+
     <div data-role="content">
-      Die Anwendung verfügt nicht über ausreichend Daten, um offline betrieben werden zu können.
+      <ul data-role="listview">
+        <li data-role="list-divider">Spiele</li>
+        <li><a href="form.html" data-prefetch data-transition="slide" data-preparegame="-1">anlegen</a></li>
+        <li><a href="games.html" data-prefetch data-transition="slide">anzeigen</a></li>
+        <li data-role="list-divider">Wartung</li>
+        <li><a href="settings.html" data-prefetch data-transition="slide">Einstellungen</a></li>
+        <li><a href="synchronize.html" data-rel="dialog" data-prefetch data-transition="slideup">Synchronisieren</a></li>
+      </ul>
     </div>
   </div>
   <!-- /page -->
