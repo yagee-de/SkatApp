@@ -109,7 +109,7 @@
             <goals>
               <goal>site</goal>
             </goals>
-            <phase>site-deploy</phase>
+            <phase>post-site</phase>
           </execution>
         </executions>
       </plugin>
@@ -409,6 +409,33 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>com.github.goldin</groupId>
+            <artifactId>copy-maven-plugin</artifactId>
+            <version>0.2.5</version>
+            <executions>
+              <execution>
+                <id>fill-min</id>
+                <phase>pre-site</phase>
+                <goals>
+                  <goal>copy</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}/min/classes</directory>
+                  <targetPath>${project.build.directory}/site/app</targetPath>
+                  <preservePath>true</preservePath>
+                  <excludes>
+                    <exclude>js/skat${combined.filename.suffix}.js</exclude>
+                    <exclude>css/skat${combined.filename.suffix}.css</exclude>
+                  </excludes>
+                </resource>
+              </resources>
+            </configuration>
           </plugin>
         </plugins>
       </build>
