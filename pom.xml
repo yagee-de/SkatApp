@@ -393,7 +393,7 @@
               <networkResources>
                 <string>*</string>
               </networkResources>
-              <fallback>/ /offline.html</fallback>
+              <fallback>/ offline.html</fallback>
             </configuration>
           </plugin>
           <plugin>
