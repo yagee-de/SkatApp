@@ -147,7 +147,7 @@ define("Skat",
             initGames : function() {
               var list = jQuery("#gameList"), games = (this.load("games") || []), date = null;
               list.empty();
-              jQuery.each(games, function(i, value) {
+              jQuery.each(games, jQuery.proxy(function(i, value) {
                 var curDate = this.gameDate(value), li, link;
                 if (curDate !== date) {
                   date = curDate;
@@ -160,8 +160,8 @@ define("Skat",
                 li.append(link);
                 this.gameInfo(value, link);
                 list.append(li);
-              });
-              list.listview('refresh');
+              }, this));
+              list.listview("refresh");
             },
             initSettings : function() {
               // dbURL
@@ -414,8 +414,9 @@ define("Skat",
               } else if (gameType === 23 || gameType === 35 || gameType === 46 || gameType === 59) {
                 gamePoints = gameType;
               } else {
-                gamePoints = gameType * (game.jacks + game.gameLevel) * game.announcement;
+                gamePoints = gameType * (game.jacks + game.gameLevel);
               }
+              gamePoints *= game.announcement;
               if (!game.won) {
                 gamePoints *= -2;
               }
@@ -474,7 +475,7 @@ define("Skat",
               });
             },
             apiCall : function(path, success) {
-              var dbURL = this.load("dbURL"), url, that=this;
+              var dbURL = this.load("dbURL"), url, that = this;
               if (dbURL === null || dbURL.length === 0) {
                 window.alert("Keine SKatDB-URL definiert");
                 return;
@@ -492,7 +493,7 @@ define("Skat",
                   }
                 },
                 success : function(json) {
-                  success.apply(that,[json]);
+                  success.apply(that, [ json ]);
                 }
               });
             },
