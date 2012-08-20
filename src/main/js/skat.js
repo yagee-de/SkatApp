@@ -498,7 +498,7 @@ define("Skat",
               });
             },
             uploadGames : function() {
-              var dbURL = this.load("dbURL"), games;
+              var dbURL = this.load("dbURL"), games, that = this;
               if (dbURL === null || dbURL.length === 0) {
                 window.alert("Keine SKatDB-URL definiert");
                 return;
@@ -524,10 +524,10 @@ define("Skat",
                   var uploaded = games.length, failedGames;
                   if (json.handList) {
                     failedGames = json.handList;
-                    this.store("games", failedGames);
+                    that.store("games", failedGames);
                     uploaded -= failedGames.length;
                   } else {
-                    this.removeGames();
+                    that.removeGames();
                   }
                   window.alert(uploaded + " von " + games.length + " Spielen hochgeladen:\n" + json.msg);
                 }
