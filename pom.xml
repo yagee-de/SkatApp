@@ -76,6 +76,16 @@
       <resource>
         <directory>src/main/js</directory>
         <targetPath>js</targetPath>
+        <excludes>
+          <exclude>skat.js</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/js</directory>
+        <targetPath>js</targetPath>
+        <includes>
+          <include>skat.js</include>
+        </includes>
         <filtering>true</filtering>
       </resource>
       <resource>

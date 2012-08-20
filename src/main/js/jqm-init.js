@@ -1,8 +1,9 @@
-/*global define */
-define([ "jquery" ], function($) {
-  $(document).bind("mobileinit", function() {
+/*global define,window */
+define([ "jquery" ], function(jQuery) {
+  window.console.log(jQuery);
+  jQuery(document).bind("mobileinit", function() {
     // Make your jQuery Mobile framework configuration changes here!
-    $.support.cors = true;
-    $.mobile.allowCrossDomainPages = true;
+    jQuery.support.cors = true;
+    jQuery.mobile.allowCrossDomainPages = true;
   });
 });
