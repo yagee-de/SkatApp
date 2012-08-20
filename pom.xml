@@ -76,6 +76,7 @@
       <resource>
         <directory>src/main/js</directory>
         <targetPath>js</targetPath>
+        <filtering>true</filtering>
       </resource>
       <resource>
         <directory>target/htmlcompressor/html</directory>

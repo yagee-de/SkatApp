@@ -1,4 +1,20 @@
 /*global define,window */
+/*!
+ * SkatApp ${project.version}
+ * 
+ * Copyright 2012, Thomas Scheffler
+ * SkatApp is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3
+ * of the License, or (at your option) any later version.
+ * 
+ * SkatApp is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
+ */
 define("Skat",
     [ "jquery", "jqm-init", "jquery.mobile", "Class" ],
     function(jQuery, jqmInit, jqm, Class) {
@@ -41,16 +57,17 @@ define("Skat",
             /**
              * @memberOf Skat#
              * @constant
-             * @description storage keys for localStorage <dl>
-             *  <dt>games:</dt>
-             *  <dd>uncommitted games</dd>
-             *  <dt>players:</dt>
-             *  <dd>all player names</dd>
-             *  <dt>groups:</dt>
-             *  <dd>all group names</dd>
-             *  <dt>dbURL:</dt>
-             *  <dd>URL do SkatDB server</dd>
-             * </dl>
+             * @description storage keys for localStorage
+             *              <dl>
+             *              <dt>games:</dt>
+             *              <dd>uncommitted games</dd>
+             *              <dt>players:</dt>
+             *              <dd>all player names</dd>
+             *              <dt>groups:</dt>
+             *              <dd>all group names</dd>
+             *              <dt>dbURL:</dt>
+             *              <dd>URL do SkatDB server</dd>
+             *              </dl>
              */
             storage : {
               games : "games",
@@ -61,14 +78,15 @@ define("Skat",
             /**
              * @memberOf Skat#
              * @constant
-             * @description URIs relative to storage.dbURL for syncing with SkatDB server <dl>
-             *  <dt>players:</dt>
-             *  <dd>get player from SkatDB</dd>
-             *  <dt>groups:</dt>
-             *  <dd>get groups from SkatDB</dd>
-             *  <dt>games:</dt>
-             *  <dd>post games to SkatDB</dd>
-             * </dl>
+             * @description URIs relative to storage.dbURL for syncing with SkatDB server
+             *              <dl>
+             *              <dt>players:</dt>
+             *              <dd>get player from SkatDB</dd>
+             *              <dt>groups:</dt>
+             *              <dd>get groups from SkatDB</dd>
+             *              <dt>games:</dt>
+             *              <dd>post games to SkatDB</dd>
+             *              </dl>
              */
             api : {
               groups : "JSON/groups",
