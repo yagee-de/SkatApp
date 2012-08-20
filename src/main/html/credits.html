@@ -15,22 +15,25 @@
 <script type="text/javascript" src="${skat.js}"></script>
 </head>
 <body>
-  <div data-role="page" data-dom-cache="true">
+  <div id="creditsPage" data-role="page" data-dom-cache="true">
     <div data-role="header" data-theme="a">
-      <h1>SkatApp</h1>
+      <a data-role="button" data-icon="back" data-prefetch data-rel="back" href="index.html">zurück</a>
+      <h1>Spiele anzeigen</h1>
     </div>
     <!-- /header -->
 
     <div data-role="content">
-      <ul data-role="listview">
-        <li data-role="list-divider">Spiele</li>
-        <li><a href="form.html" data-prefetch data-transition="slide" data-preparegame="-1">anlegen</a></li>
-        <li><a href="games.html" data-prefetch data-transition="slide">anzeigen</a></li>
-        <li data-role="list-divider">Wartung</li>
-        <li><a href="settings.html" data-prefetch data-transition="slide">Einstellungen</a></li>
-        <li><a href="synchronize.html" data-rel="dialog" data-prefetch data-transition="slideup">Synchronisieren</a></li>
-        <li data-role="list-divider">Info</li>
-        <li><a href="credits.html" data-prefetch data-transition="slide">Credits</a></li>
+      <ul data-role="listview" data-theme="d" data-divider-theme="d" id="gameList">
+        <li data-role="list-divider">Idee</li>
+        <li>Thomas Scheffler</li>
+        <li>Mathias Eichner</li>
+        <li data-role="list-divider">Prototyp</li>
+        <li>Felix Eckardt</li>
+        <li data-role="list-divider">Umsetzung</li>
+        <li>Thomas Scheffler</li>
+        <li data-role="list-divider">SkatDB</li>
+        <li>Mathias Eichner</li>
+        <li><a href="https://github.com/Mewel/SkatDB">Projekt-Seite</a></li>
       </ul>
     </div>
   </div>
