@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.yagee.skat</groupId>
   <artifactId>SkatApp</artifactId>
@@ -8,7 +9,7 @@
   <name>SkatApp</name>
   <description>A WebApp for SkatDB</description>
   <url>https://github.com/yagee-de/SkatApp</url>
-  
+
   <prerequisites>
     <maven>3.0</maven>
   </prerequisites>
@@ -118,34 +119,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.1</version>
-        <configuration>
-          <reportPlugins>
-            <reportPlugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-project-info-reports-plugin</artifactId>
-              <version>2.5</version>
-              <configuration>
-                <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
-                <dependencyLocationsEnabled>true</dependencyLocationsEnabled>
-              </configuration>
-            </reportPlugin>
-            <reportPlugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-checkstyle-plugin</artifactId>
-              <version>2.6</version>
-            </reportPlugin>
-            <reportPlugin>
-              <groupId>gr.abiss.mvn.plugins</groupId>
-              <artifactId>maven-jstools-plugin</artifactId>
-              <version>0.7</version>
-            </reportPlugin>
-          </reportPlugins>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
         <version>1.7</version>
@@ -218,7 +191,9 @@
                 <jsSourceFile>org/codehaus/mojo/jquery-amd/1.7.1-alpha-1/jquery-amd-1.7.1-alpha-1.js</jsSourceFile>
                 <jsSourceFile>jqm-init.js</jsSourceFile>
                 <jsSourceFile>org/codehaus/mojo/jquery-mobile-amd/1.1.0-alpha-1/jquery-mobile-amd-1.1.0-alpha-1.js</jsSourceFile>
+                <jsSourceFile>class.js</jsSourceFile>
                 <jsSourceFile>skat.js</jsSourceFile>
+                <jsSourceFile>skat-init.js</jsSourceFile>
               </jsSourceFiles>
               <jsFinalFile>skat${combined.filename.suffix}.js</jsFinalFile>
             </configuration>
@@ -343,23 +318,42 @@
           <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>gr.abiss.mvn.plugins</groupId>
-        <artifactId>maven-jstools-plugin</artifactId>
-        <version>0.7</version>
-        <inherited>false</inherited>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>jslint</report>
-              <report>jsdoc</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
     </plugins>
   </reporting>
   <profiles>
+    <profile>
+      <id>jsdoc</id>
+      <activation>
+        <file>
+          <exists>${user.home}/jsdoc-toolkit/jsrun.sh</exists>
+        </file>
+      </activation>
+      <reporting>
+        <plugins>
+          <plugin>
+            <groupId>gr.abiss.mvn.plugins</groupId>
+            <artifactId>maven-jstools-plugin</artifactId>
+            <version>0.7</version>
+            <inherited>false</inherited>
+            <configuration>
+<!--               <jsDir>src/main/resources</jsDir> -->
+              <includeUndocumented>true</includeUndocumented>
+              <jsdocHome>${user.home}/jsdoc-toolkit</jsdocHome>
+              <template>codeview</template>
+            </configuration>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <!-- include the desired reports -->
+                  <report>jsdoc</report>
+                  <report>jslint</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>
+    </profile>
     <profile>
       <id>release-mode</id>
       <activation>
