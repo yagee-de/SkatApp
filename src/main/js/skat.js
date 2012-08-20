@@ -474,7 +474,7 @@ define("Skat",
               });
             },
             apiCall : function(path, success) {
-              var dbURL = this.load("dbURL"), url;
+              var dbURL = this.load("dbURL"), url, that=this;
               if (dbURL === null || dbURL.length === 0) {
                 window.alert("Keine SKatDB-URL definiert");
                 return;
@@ -492,7 +492,7 @@ define("Skat",
                   }
                 },
                 success : function(json) {
-                  success(json);
+                  success.apply(that,[json]);
                 }
               });
             },
