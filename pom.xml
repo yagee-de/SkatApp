@@ -204,6 +204,7 @@
                 <jsSourceFile>org/codehaus/mojo/jquery-mobile-amd/1.1.0-alpha-1/jquery-mobile-amd-1.1.0-alpha-1.js</jsSourceFile>
                 <jsSourceFile>header.js</jsSourceFile>
                 <jsSourceFile>class.js</jsSourceFile>
+                <jsSourceFile>skatgame.js</jsSourceFile>
                 <jsSourceFile>skatform.js</jsSourceFile>
                 <jsSourceFile>skat.js</jsSourceFile>
                 <jsSourceFile>skat-init.js</jsSourceFile>

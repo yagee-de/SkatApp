@@ -16,8 +16,8 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("Skat",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm" ],
-    function(jQuery, jqmInit, jqm, Class, SkatForm) {
+    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm", "SkatGame" ],
+    function(jQuery, jqmInit, jqm, Class, SkatForm, SkatGame) {
       "use strict";
       var Skat = Class
           .extend(
@@ -118,7 +118,7 @@ define("Skat",
               var list = jQuery("#gameList"), games = (this.load("games") || []), date = null;
               list.empty();
               jQuery.each(games, jQuery.proxy(function(i, value) {
-                var curDate = this.gameDate(value), li, link;
+                var game = new SkatGame(value), curDate = game.getDateString(), li, link;
                 if (curDate !== date) {
                   date = curDate;
                   // <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
@@ -128,7 +128,7 @@ define("Skat",
                 li.addClass(value.won ? "won" : "lost");
                 link = jQuery('<a href="form.html" data-transition="slide" data-prepareGame="' + i + '"/>');
                 li.append(link);
-                this.gameInfo(value, link);
+                game.appendInfo(link);
                 list.append(li);
               }, this));
               list.listview("refresh");
@@ -143,7 +143,7 @@ define("Skat",
             getExport : function() {
               var games = this.load("games") || [];
               jQuery.each(games, jQuery.proxy(function(i, game) {
-                var value = this.gamePoints(game);
+                var value = new SkatGame(game).getPoints();
                 game.value = value;
               }, this));
               return games;
@@ -155,7 +155,7 @@ define("Skat",
               window.localStorage.setItem(this.storage[storeKey], JSON.stringify(value));
             },
             storeGame : function() {
-              var game = this.form.getGame(), games;
+              var game = this.form.getGame().toJSON(), games;
               if (game.player.length === 0) {
                 window.alert("Kein Spieler ausgewählt");
                 jQuery.mobile.silentScroll(0);
@@ -196,66 +196,9 @@ define("Skat",
                 return false;
               }
               game = games[gameNumber];
-              this.updateForm(game);
+              this.forms.updateForm(new SkatGame(game));
               this.currentGame = gameNumber;
               return true;
-            },
-            gameTypeName : function(gameType) {
-              switch (gameType) {
-              case 9:
-                return "Schellen";
-              case 10:
-                return "Herz";
-              case 11:
-                return "Grün";
-              case 12:
-                return "Eichel";
-              case 23:
-                return "Null";
-              case 24:
-                return "Grand";
-              case 35:
-                return "Null Hand";
-              case 46:
-                return "Null Ouvert";
-              case 59:
-                return "Null Ouvert Hand";
-              default:
-                return "unbekannt";
-              }
-            },
-            gamePoints : function(game) {
-              var gamePoints, gameType = game.gameType;
-              if (game.bid === 0) {
-                if (game.gameLevel === 2) {
-                  // Durchmarsch
-                  return 240;
-                }
-                return game.points * game.gameLevel;
-              } else if (gameType === 23 || gameType === 35 || gameType === 46 || gameType === 59) {
-                gamePoints = gameType;
-              } else {
-                gamePoints = gameType * (game.jacks + game.gameLevel);
-              }
-              gamePoints *= game.announcement;
-              if (!game.won) {
-                gamePoints *= -2;
-              }
-              return gamePoints;
-            },
-            gameClock : function(game) {
-              var date = new Date(game.createDate);
-              return (date.getHours() < 10 ? "0" : "") + date.getHours() + ":" + (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
-            },
-            gameDate : function(game) {
-              var date = new Date(game.createDate);
-              return this.day[date.getDay()] + ", " + date.getDate() + ". " + this.month[date.getMonth()] + " " + date.getFullYear();
-            },
-            gameInfo : function(game, insert) {
-              insert.append("<h3>" + game.player + "</h3>");
-              insert.append("<p><strong>" + (game.won ? "Gewonnen" : "Verloren") + "</strong></p>");
-              insert.append("<p>" + (game.bid ? this.gameTypeName(game.gameType) : "Ramsch") + " Punkte:" + this.gamePoints(game) + "</p>");
-              insert.append('<p class="ui-li-aside"><strong>' + this.gameClock(game) + "</strong></p>");
             },
             addPlayer : function(playerName) {
               var players = (this.load("players") || []), i;

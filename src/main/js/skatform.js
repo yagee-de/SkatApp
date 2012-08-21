@@ -16,8 +16,8 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("SkatForm",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class" ],
-    function(jQuery, jqmInit, jqm, Class) {
+    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGame" ],
+    function(jQuery, jqmInit, jqm, Class, SkatGame) {
       "use strict";
       var SkatForm = Class
           .extend(
@@ -135,7 +135,7 @@ define("SkatForm",
               jQuery("#points").slider("refresh");
             },
             updateScore : function() {
-              var game = this.getGame(), gamePoints = this._skat.gamePoints(game);
+              var game = this.getGame(), gamePoints = game.getPoints();
               document.getElementById("p1").innerHTML = "Punkte: " + gamePoints;
             },
             bidChange : function(source) {
@@ -199,7 +199,7 @@ define("SkatForm",
                 json.won = jQuery("#won").attr('checked') ? true : false;
 
               }
-              return json;
+              return new SkatGame(json);
             },
             updateForm : function(game) {
               jQuery("#group").val(game.group).selectmenu("refresh");
