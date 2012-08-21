@@ -310,10 +310,10 @@ define("Skat",
             },
             getExport : function() {
               var games = this.load("games") || [];
-              jQuery.each(games, function(i, game) {
+              jQuery.each(games, jQuery.proxy(function(i, game) {
                 var value = this.gamePoints(game);
                 game.value = value;
-              });
+              }, this));
               return games;
             },
             load : function(storeKey, value) {
