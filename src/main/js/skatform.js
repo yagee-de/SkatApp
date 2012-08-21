@@ -28,9 +28,6 @@ define("SkatForm",
             init : function(skatInstance) {
               this._skat = skatInstance;
             },
-            bids : [ 18, 20, 22, 23, 24, 27, 30, 33, 35, 36, 40, 44, 45, 46, 48, 50, 54, 55, 59, 60, 63, 66, 70, 72, 77, 80, 81, 84, 88,
-                90, 96, 99, 100, 108, 110, 117, 120, 121, 126, 130, 132, 135, 140, 143, 144, 150, 153, 154, 156, 160, 162, 165, 168, 170,
-                176, 180, 187, 192, 198, 204, 216, 240, 264 ],
             /**
              * @memberOf Skat#
              * @description current game from localStore or '-1' for new game
@@ -41,7 +38,7 @@ define("SkatForm",
               var biddingSelector = '#bid';
               jQuery(biddingSelector).empty();
               jQuery(biddingSelector).append('<option value="0">Ramsch</option>');
-              jQuery.each(this.bids, function(i, value) {
+              jQuery.each(SkatGame.bids, function(i, value) {
                 var option = jQuery('<option>').text(value).attr('value', value);
                 if (i === 0) {
                   option.attr('selected', true);
@@ -91,7 +88,7 @@ define("SkatForm",
               if (gameNumber >= games.length) {
                 return;
               }
-              game = games[gameNumber];
+              game = new SkatGame(games[gameNumber]);
               jQuery("#formPage").children(":jqmData(role=header)").children("h1").text("Spiel Nr. " + (gameNumber + 1) + " bearbeiten");
               jQuery("#won").attr("checked", game.won ? true : false);
               jQuery("#hand").attr("checked", game.hand ? true : false);
@@ -103,7 +100,7 @@ define("SkatForm",
               jQuery("#gameType").val(game.gameType);
               jQuery("#gameLevel").val(game.gameLevel);
               jQuery("#announcement").val(game.announcement);
-              jQuery("#timeCreated").val((new Date(game.createDate)).toISOString());
+              jQuery("#timeCreated").val(game.createDate.toISOString());
               jQuery("#points").val(game.points ? game.points : 40);
               jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").show();
             },
@@ -140,18 +137,26 @@ define("SkatForm",
             },
             bidChange : function(source) {
               var bid = parseInt(source.value, 10);
-              source.old = source.recent;
-              source.recent = bid;
-              // console.log("bid: " + bid + ", old value: " + source.old);
-              if ((bid === 0 && source.old !== 0) || (source.old === 0 && bid !== 0)) {
-                jQuery("#points").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#hand").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#gameType").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#announcement").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#jacks").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#won").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                this.updateGameLevel();
+              switch (bid) {
+              case 0:
+                jQuery("#points").parentsUntil("#inputForm", "div.ui-field-contain").show();
+                jQuery("#hand").parentsUntil("#inputForm", "div.ui-field-contain").hide();
+                jQuery("#gameType").parentsUntil("#inputForm", "div.ui-field-contain").hide();
+                jQuery("#announcement").parentsUntil("#inputForm", "div.ui-field-contain").hide();
+                jQuery("#jacks").parentsUntil("#inputForm", "div.ui-field-contain").hide();
+                jQuery("#won").parentsUntil("#inputForm", "div.ui-field-contain").hide();
+                break;
+
+              default:
+                jQuery("#points").parentsUntil("#inputForm", "div.ui-field-contain").hide();
+                jQuery("#hand").parentsUntil("#inputForm", "div.ui-field-contain").show();
+                jQuery("#gameType").parentsUntil("#inputForm", "div.ui-field-contain").show();
+                jQuery("#announcement").parentsUntil("#inputForm", "div.ui-field-contain").show();
+                jQuery("#jacks").parentsUntil("#inputForm", "div.ui-field-contain").show();
+                jQuery("#won").parentsUntil("#inputForm", "div.ui-field-contain").show();
+                break;
               }
+              this.updateGameLevel();
             },
             updateGameLevel : function() {
               if (parseInt(jQuery("#bid").val(), 10) === 0) {

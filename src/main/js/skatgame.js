@@ -17,7 +17,24 @@
  */
 define("SkatGame", [ "Class" ], function(Class) {
   "use strict";
-  var bids = [ 18, 20, 22, 23, 24, 27, 30, 33, 35, 36, 40, 44, 45, 46, 48, 50, 54, 55, 59, 60, 63, 66, 70, 72, 77, 80, 81, 84, 88, 90, 96,
+  /**
+   * @memberOf SkatGame
+   * @constant
+   * @description maps javascript month to names
+   */
+  var month = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
+  /**
+   * @memberOf SkatGame
+   * @constant
+   * @description maps javascript days to names
+   */
+  day = [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sonnabend" ],
+  /**
+   * @memberOf SkatGame
+   * @constant
+   * @description valid bid values
+   */
+  bids = [ 18, 20, 22, 23, 24, 27, 30, 33, 35, 36, 40, 44, 45, 46, 48, 50, 54, 55, 59, 60, 63, 66, 70, 72, 77, 80, 81, 84, 88, 90, 96,
       99, 100, 108, 110, 117, 120, 121, 126, 130, 132, 135, 140, 143, 144, 150, 153, 154, 156, 160, 162, 165, 168, 170, 176, 180, 187, 192,
       198, 204, 216, 240, 264 ], SkatGame;
   SkatGame = Class.extend(
@@ -43,8 +60,8 @@ define("SkatGame", [ "Class" ], function(Class) {
     player : null,
     bid : 0,
     gameLevel : 0,
-    created : 0,
-    modified : 0,
+    createDate : 0,
+    modifydDate : 0,
     points : 0,
     jacks : 0,
     gameType : 0,
@@ -61,8 +78,8 @@ define("SkatGame", [ "Class" ], function(Class) {
         "player" : this.player,
         "bid" : this.bid,
         "gameLevel" : this.gameLevel,
-        "createDate" : this.created.getTime(),
-        "modifyDate" : this.modified.getTime()
+        "createDate" : this.createDate.getTime(),
+        "modifyDate" : this.modifyDate.getTime()
       };
       if (this.isRamsch()) {
         json.points = (this.gameLevel === 2) ? 120 : this.points;
@@ -74,6 +91,7 @@ define("SkatGame", [ "Class" ], function(Class) {
         json.announcement = this.announcement;
         json.won = this.won;
       }
+      return json;
     },
     /**
      * @description used by JSON.parse to fill this instance
@@ -126,8 +144,8 @@ define("SkatGame", [ "Class" ], function(Class) {
           throw key + " is not a boolean value";
         }
         break;
-      case "created":
-      case "modifed":
+      case "createDate":
+      case "modifyDate":
         if (typeof value === 'number' && value > new Date(2000, 0, 1, 0, 0, 0, 0).getTime()) {
           this[key] = new Date(value);
         } else {
@@ -177,7 +195,7 @@ define("SkatGame", [ "Class" ], function(Class) {
     },
     getDateString : function() {
       var date = new Date(this.createDate);
-      return this.day[date.getDay()] + ", " + date.getDate() + ". " + this.month[date.getMonth()] + " " + date.getFullYear();
+      return day[date.getDay()] + ", " + date.getDate() + ". " + month[date.getMonth()] + " " + date.getFullYear();
     },
     /**
      * @description add info about this game to DOM
@@ -215,5 +233,7 @@ define("SkatGame", [ "Class" ], function(Class) {
     }
   });
   SkatGame.bids = bids;
+  SkatGame.month = month;
+  SkatGame.day = day;
   return SkatGame;
 });

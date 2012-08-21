@@ -29,18 +29,6 @@ define("Skat",
             },
             /**
              * @memberOf Skat#
-             * @constant
-             * @description maps javascript month to names
-             */
-            month : [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
-            /**
-             * @memberOf Skat#
-             * @constant
-             * @description maps javascript days to names
-             */
-            day : [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sonnabend" ],
-            /**
-             * @memberOf Skat#
              * @description current game from localStore or '-1' for new game
              */
             currentGame : -1,
@@ -164,17 +152,17 @@ define("Skat",
               games = this.load("games") || [];
               if (this.currentGame === -1) {
                 games.push(game);
-                this.form.resetForm();
-                this.form.refreshForm();
               } else {
                 games[this.currentGame] = game;
               }
               this.store("games", games);
               window.alert("Spiel gespeichert");
+              this.form.resetForm();
+              this.form.refreshForm();
               if (this.currentGame === -1) {
                 jQuery.mobile.silentScroll(0);
               } else {
-                location.back();
+                window.history.back();
               }
             },
             deleteGame : function(gameNumber) {
