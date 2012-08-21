@@ -36,7 +36,7 @@
         </label> <input type="datetime" name="timeCreated" id="timeCreated" />
       </div>
       <div data-role="fieldcontain">
-        <label for="bid"> Reizwert: </label> <select name="bid" id="bid" onchange="skat.bidChange(this)">
+        <label for="bid"> Reizwert: </label> <select name="bid" id="bid" onchange="skat.form.bidChange(this)">
         </select>
       </div>
       <div data-role="fieldcontain">
@@ -53,7 +53,7 @@
       <div data-role="fieldcontain">
         <fieldset data-role="controlgroup" data-type="vertical">
           <label for="hand"> Hand gespielt </label><input name="hand" id="hand" type="checkbox"
-            onchange="skat.updateGameLevel()">
+            onchange="skat.form.updateGameLevel()">
         </fieldset>
       </div>
       <div data-role="fieldcontain">
@@ -90,11 +90,6 @@
       </div>
       <div data-role="fieldcontain">
         <fieldset data-role="controlgroup" data-type="vertical">
-          <!--           <label for="won">Gewonnen</label> <select name="won" id="won" data-role="slider" data-track-theme="d" -->
-          <!--             data-theme="a"> -->
-          <!--             <option value="false">Nein</option> -->
-          <!--             <option value="true" selected="selected">Ja</option> -->
-          <!--           </select> -->
           <label for="won"> Gewonnen </label> <input name="won" id="won" type="checkbox" checked data-theme="d">
         </fieldset>
       </div>

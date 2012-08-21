@@ -26,19 +26,19 @@ define([ "jquery", "jqm-init", "jquery.mobile", "Skat" ], function(jQuery, jqmIn
   jQuery(document).bind("pageinit", function() {});
   jQuery(document).delegate("#formPage", "pagebeforecreate", function() {
     skat.form.createComplete = false;
-    skat.initBiddingValues();
-    skat.initJacks();
-    skat.initPlayers();
-    skat.initGroups();
-    skat.resetForm();
+    skat.form.initBiddingValues();
+    skat.form.initJacks();
+    skat.form.initPlayers();
+    skat.form.initGroups();
+    skat.form.resetForm();
     skat.form.createComplete = true;
   });
   jQuery(document).delegate("#formPage", "pagebeforeshow", function(event, data) {
-    skat.initPlayers();
-    skat.initGroups();
-    skat.fillForm(skat.currentGame);
-    skat.refreshForm();
-    skat.updateScore();
+    skat.form.initPlayers();
+    skat.form.initGroups();
+    skat.form.fillForm(skat.currentGame);
+    skat.form.refreshForm();
+    skat.form.updateScore();
   });
   jQuery(document).delegate("#gamesPage", "pagebeforeshow", function() {
     skat.initGames();
@@ -47,7 +47,7 @@ define([ "jquery", "jqm-init", "jquery.mobile", "Skat" ], function(jQuery, jqmIn
     skat.initSettings();
   });
   jQuery(document).change(function() {
-    skat.updateScore();
+    skat.form.updateScore();
   });
 
 });

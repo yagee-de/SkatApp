@@ -1,5 +1,5 @@
 /*global define,window */
-/*!
+/*
  * SkatApp ${project.version}
  * 
  * Copyright 2012, Thomas Scheffler
@@ -16,8 +16,8 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("Skat",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class" ],
-    function(jQuery, jqmInit, jqm, Class) {
+    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm" ],
+    function(jQuery, jqmInit, jqm, Class, SkatForm) {
       "use strict";
       var Skat = Class
           .extend(
@@ -25,6 +25,7 @@ define("Skat",
           {
             /** @constructs */
             init : function() {
+              this.form = new SkatForm(this);
             },
             /**
              * @memberOf Skat#
@@ -51,9 +52,7 @@ define("Skat",
              * @description current game from localStore or '-1' for new game
              */
             currentGame : -1,
-            form : {
-              createComplete : false
-            },
+            form : null,
             /**
              * @memberOf Skat#
              * @constant
@@ -100,49 +99,23 @@ define("Skat",
             onUpdateReady : function() {
               window.alert("SkatApp aktualisiert");
             },
-            initBiddingValues : function() {
-              var biddingSelector = '#bid';
-              jQuery(biddingSelector).empty();
-              jQuery(biddingSelector).append('<option value="0">Ramsch</option>');
-              jQuery.each(this.bids, function(i, value) {
-                var option = jQuery('<option>').text(value).attr('value', value);
-                if (i === 0) {
-                  option.attr('selected', true);
-                }
-                jQuery(biddingSelector).append(option);
-              });
-            },
-            initPlayers : function() {
-              var players = (this.load("players") || []), playersSelector = "#player", option;
-              jQuery(playersSelector).empty();
-              option = jQuery('<option>').attr('selected', true);
-              jQuery(playersSelector).append(option);
+            initSettings : function() {
+              // dbURL
+              var skatURL = this.load("dbURL"), playerList = jQuery("#playerList"), players = (this.load("players") || []), groupList = jQuery("#groupList"), groups = (this
+                  .load("groups") || []);
+              jQuery("#dbURL").val(skatURL);
+              // players
+              jQuery("#playerList .player").remove();
               jQuery.each(players, function(i, player) {
-                option = jQuery('<option>').text(player).attr('value', player);
-                jQuery(playersSelector).append(option);
+                jQuery('<li class="player"/>').text(player).appendTo(playerList);
               });
-            },
-            initGroups : function() {
-              var groups = (this.load("groups") || []), groupsSelector = "#group";
-              jQuery(groupsSelector).empty();
+              playerList.listview("refresh");
+              // groups
+              jQuery("#groupList .group").remove();
               jQuery.each(groups, function(i, group) {
-                var option = jQuery('<option>').text(group).attr('value', group);
-                if (i === 0) {
-                  option.attr('selected', true);
-                }
-                jQuery(groupsSelector).append(option);
+                jQuery('<li class="group"/>').text(group).appendTo(groupList);
               });
-            },
-            initJacks : function() {
-              var jacksSelector = "#jacks", i, option;
-              jQuery(jacksSelector).empty();
-              for (i = 1; i < 12; i++) {
-                option = jQuery('<option>').text(i).attr('value', i);
-                if (i === 0) {
-                  option.attr('selected', true);
-                }
-                jQuery(jacksSelector).append(option);
-              }
+              groupList.listview("refresh");
             },
             initGames : function() {
               var list = jQuery("#gameList"), games = (this.load("games") || []), date = null;
@@ -163,150 +136,12 @@ define("Skat",
               }, this));
               list.listview("refresh");
             },
-            initSettings : function() {
-              // dbURL
-              var skatURL = this.load("dbURL"), playerList = jQuery("#playerList"), players = (this.load("players") || []), groupList = jQuery("#groupList"), groups = (this
-                  .load("groups") || []);
-              jQuery("#dbURL").val(skatURL);
-              // players
-              jQuery("#playerList .player").remove();
-              jQuery.each(players, function(i, player) {
-                jQuery('<li class="player"/>').text(player).appendTo(playerList);
-              });
-              playerList.listview("refresh");
-              // groups
-              jQuery("#groupList .group").remove();
-              jQuery.each(groups, function(i, group) {
-                jQuery('<li class="group"/>').text(group).appendTo(groupList);
-              });
-              groupList.listview("refresh");
-            },
             prepareGame : function(gameNumber) {
               this.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
               return false;
             },
-            fillForm : function(gameNumber) {
-              if (gameNumber < 0) {
-                jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").hide();
-                jQuery("#formPage").children(":jqmData(role=header)").children("h1").text("Spiel anlegen");
-                return;
-              }
-              var games = this.load("games") || [], game;
-              if (gameNumber >= games.length) {
-                return;
-              }
-              game = games[gameNumber];
-              jQuery("#formPage").children(":jqmData(role=header)").children("h1").text("Spiel Nr. " + (gameNumber + 1) + " bearbeiten");
-              jQuery("#won").attr("checked", game.won ? true : false);
-              jQuery("#hand").attr("checked", game.hand ? true : false);
-              this.updateGameLevel();
-              jQuery("#group").val(game.group);
-              jQuery("#player").val(game.player);
-              jQuery("#bid").val(game.bid).trigger('onchange');
-              jQuery("#jacks").val(game.jacks);
-              jQuery("#gameType").val(game.gameType);
-              jQuery("#gameLevel").val(game.gameLevel);
-              jQuery("#announcement").val(game.announcement);
-              jQuery("#timeCreated").val((new Date(game.createDate)).toISOString());
-              jQuery("#points").val(game.points ? game.points : 40);
-              jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").show();
-            },
-            resetForm : function() {
-              jQuery("#won").attr("checked", true);
-              jQuery("#hand").attr("checked", false);
-              this.updateGameLevel();
-              jQuery("#player").val(jQuery(this).prop("defaultSelected"));
-              jQuery("#bid").val(18).trigger('onchange');
-              jQuery("#jacks").val(1);
-              jQuery("#gameType").val(9);
-              jQuery("#gameLevel").val(1);
-              jQuery("#announcement").val(1);
-              if (jQuery("#timeCreated").val().length === 0) {
-                jQuery("#timeCreated").val((new Date()).toISOString());
-              }
-              jQuery("#points").val(40);
-            },
-            refreshForm : function() {
-              jQuery("#won").checkboxradio("refresh");
-              jQuery("#hand").checkboxradio("refresh");
-              jQuery("#player").selectmenu("refresh");
-              jQuery("#group").selectmenu("refresh");
-              jQuery("#bid").selectmenu("refresh");
-              jQuery("#jacks").selectmenu("refresh");
-              jQuery("#gameType").selectmenu("refresh");
-              jQuery("#gameLevel").selectmenu("refresh");
-              jQuery("#announcement").selectmenu("refresh");
-              jQuery("#points").slider("refresh");
-            },
             clearStorage : function() {
               window.localStorage.clear();
-            },
-            updateScore : function() {
-              var game = this.getGame(), gamePoints = this.gamePoints(game);
-              document.getElementById("p1").innerHTML = "Punkte: " + gamePoints;
-            },
-            bidChange : function(source) {
-              var bid = parseInt(source.value, 10);
-              source.old = source.recent;
-              source.recent = bid;
-              // console.log("bid: " + bid + ", old value: " + source.old);
-              if ((bid === 0 && source.old !== 0) || (source.old === 0 && bid !== 0)) {
-                jQuery("#points").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#hand").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#gameType").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#announcement").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#jacks").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                jQuery("#won").parentsUntil("#inputForm", "div.ui-field-contain").toggle();
-                this.updateGameLevel();
-              }
-            },
-            updateGameLevel : function() {
-              if (parseInt(jQuery("#bid").val(), 10) === 0) {
-                document.getElementById("gameLevel").innerHTML = "<option value=-1>Normal</option><option value=-2>Jungfer (*-2)</option><option value=2>Durchmarsch (*2)</option>";
-              } else if (jQuery("#hand").attr('checked')) {
-                document.getElementById("gameLevel").innerHTML = "<option value=2>Hand (+2)</option><option value=3>Schneider (+3)</option><option value=4>Schneider angesagt (+4)</option><option value=5>Schwarz (+5)</option><option value=6>Schwarz angesagt (+6)</option><option value=7>Ouvert (+7)</option>";
-              } else {
-                document.getElementById("gameLevel").innerHTML = "<option value=1>Normal (+1)</option><option value=2>Schneider (+2)</option><option value=3>Schwarz (+3)</option>";
-              }
-              if (this.form.createComplete) {
-                jQuery("#gameLevel").selectmenu("refresh");
-              }
-            },
-            getGame : function() {
-              var group = jQuery("#group").val(), player = jQuery("#player").val(), bid = parseInt(jQuery("#bid").val(), 10), gamelevel = parseInt(jQuery("#gameLevel")
-                  .val(),
-                  10), modified = new Date().getTime(), created = modified, timeCreated, json, points;
-              try {
-                timeCreated = jQuery("#timeCreated").val();
-                if (timeCreated.length > 0) {
-                  timeCreated = new Date(timeCreated);
-                  created = timeCreated.getTime();
-                }
-              } catch (e) {
-                window.alert(e);
-              }
-              json = {
-                "group" : group,
-                "player" : player,
-                "bid" : bid,
-                "gameLevel" : gamelevel,
-                "createDate" : created,
-                "modifyDate" : modified
-              };
-              if (bid === 0) {
-                // Ramsch
-                points = parseInt(jQuery("#points").val(), 10);
-                json.points = (gamelevel === 2) ? 120 : points;
-                json.won = (gamelevel === 2);
-              } else {
-                json.jacks = parseInt(jQuery("#jacks").val(), 10);
-                json.gameType = parseInt(jQuery("#gameType").val(), 10);
-                json.hand = jQuery("#hand").attr('checked') ? true : false;
-                json.announcement = parseInt(jQuery("#announcement").val(), 10);
-                json.won = jQuery("#won").attr('checked') ? true : false;
-
-              }
-              return json;
             },
             getExport : function() {
               var games = this.load("games") || [];
@@ -323,7 +158,7 @@ define("Skat",
               window.localStorage.setItem(this.storage[storeKey], JSON.stringify(value));
             },
             storeGame : function() {
-              var game = this.getGame(), games;
+              var game = this.form.getGame(), games;
               if (game.player.length === 0) {
                 window.alert("Kein Spieler ausgewählt");
                 jQuery.mobile.silentScroll(0);
@@ -332,8 +167,8 @@ define("Skat",
               games = this.load("games") || [];
               if (this.currentGame === -1) {
                 games.push(game);
-                this.resetForm();
-                this.refreshForm();
+                this.form.resetForm();
+                this.form.refreshForm();
               } else {
                 games[this.currentGame] = game;
               }
@@ -367,17 +202,6 @@ define("Skat",
               this.updateForm(game);
               this.currentGame = gameNumber;
               return true;
-            },
-            updateForm : function(game) {
-              jQuery("#group").val(game.group).selectmenu("refresh");
-              jQuery("#player").val(game.player).selectmenu("refresh");
-              jQuery("#bid").val(game.bid).selectmenu("refresh");
-              jQuery("#jacks").val(game.jacks).selectmenu("refresh");
-              jQuery("#gameType").val(game.gameType).selectmenu("refresh");
-              jQuery("#hand").attr('checked', game.hand).checkboxradio("refresh");
-              jQuery("#gameLevel").val(game.gameLevel).selectmenu("refresh");
-              jQuery("#announcement").val(game.announcement).selectmenu("refresh");
-              jQuery("#won").attr('checked', game.won).checkboxradio("refresh");
             },
             gameTypeName : function(gameType) {
               switch (gameType) {
