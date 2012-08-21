@@ -44,7 +44,7 @@ define([ "jquery", "jqm-init", "jquery.mobile", "Skat" ], function(jQuery, jqmIn
     skat.games.initGames();
   });
   jQuery(document).delegate("#settingsPage", "pagebeforeshow", function() {
-    skat.initSettings();
+    skat.settings.initSettings();
   });
   jQuery(document).change(function() {
     skat.form.updateScore();

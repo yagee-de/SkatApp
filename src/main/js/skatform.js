@@ -206,6 +206,29 @@ define("SkatForm",
               }
               return new SkatGame(json);
             },
+            storeGame : function() {
+              var game = this.getGame().toJSON(), games;
+              if (game.player.length === 0) {
+                window.alert("Kein Spieler ausgewählt");
+                jQuery.mobile.silentScroll(0);
+                return;
+              }
+              games = this._skat.load("games") || [];
+              if (this.currentGame === -1) {
+                games.push(game);
+              } else {
+                games[this.currentGame] = game;
+              }
+              this._skat.store("games", games);
+              window.alert("Spiel gespeichert");
+              this.resetForm();
+              this.refreshForm();
+              if (this.currentGame === -1) {
+                jQuery.mobile.silentScroll(0);
+              } else {
+                window.history.back();
+              }
+            },
             updateForm : function(game) {
               jQuery("#group").val(game.group).selectmenu("refresh");
               jQuery("#player").val(game.player).selectmenu("refresh");

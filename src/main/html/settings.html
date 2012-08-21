@@ -31,7 +31,7 @@
           <div data-role="fieldcontain">
             <label for="dbURL"> SkatDB URL: </label> <input type="text" name="dbURL" id="dbURL" />
           </div>
-          <button onclick="skat.setDbURL(jQuery('#dbURL').val());alert('Einstellungen gespeichert.');">Speichern</button>
+          <button onclick="skat.settings.setDbURL(jQuery('#dbURL').val());alert('Einstellungen gespeichert.');">Speichern</button>
           <ul id="playerList" data-role="listview" data-inset="true">
             <li data-role="list-divider">Spieler</li>
             <li data-icon="plus"><a href="addPlayer.html" data-rel="dialog" data-transition>Hinzufügen</a></li>

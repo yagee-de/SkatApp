@@ -16,8 +16,8 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("Skat",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm", "SkatGame", "SkatGames" ],
-    function(jQuery, jqmInit, jqm, Class, SkatForm, SkatGame, SkatGames) {
+    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm", "SkatGame", "SkatGames", "SkatSettings" ],
+    function(jQuery, jqmInit, jqm, Class, SkatForm, SkatGame, SkatGames, SkatSettings) {
       "use strict";
       var Skat = Class
           .extend(
@@ -27,6 +27,7 @@ define("Skat",
             init : function() {
               this.form = new SkatForm(this);
               this.games = new SkatGames(this);
+              this.settings = new SkatSettings(this);
             },
             /**
              * @memberOf Skat#
@@ -45,6 +46,12 @@ define("Skat",
              * @type SkatGames
              */
             games : null,
+            /**
+             * @memberOf Skat#
+             * @description logic for settings page
+             * @type SkatSettings
+             */
+            settings : null,
             /**
              * @memberOf Skat#
              * @constant
@@ -91,30 +98,9 @@ define("Skat",
             onUpdateReady : function() {
               window.alert("SkatApp aktualisiert");
             },
-            initSettings : function() {
-              // dbURL
-              var skatURL = this.load("dbURL"), playerList = jQuery("#playerList"), players = (this.load("players") || []), groupList = jQuery("#groupList"), groups = (this
-                  .load("groups") || []);
-              jQuery("#dbURL").val(skatURL);
-              // players
-              jQuery("#playerList .player").remove();
-              jQuery.each(players, function(i, player) {
-                jQuery('<li class="player"/>').text(player).appendTo(playerList);
-              });
-              playerList.listview("refresh");
-              // groups
-              jQuery("#groupList .group").remove();
-              jQuery.each(groups, function(i, group) {
-                jQuery('<li class="group"/>').text(group).appendTo(groupList);
-              });
-              groupList.listview("refresh");
-            },
             prepareGame : function(gameNumber) {
               this.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
               return false;
-            },
-            clearStorage : function() {
-              window.localStorage.clear();
             },
             getExport : function() {
               var games = this.load("games") || [];
@@ -130,29 +116,6 @@ define("Skat",
             store : function(storeKey, value) {
               window.localStorage.setItem(this.storage[storeKey], JSON.stringify(value));
             },
-            storeGame : function() {
-              var game = this.form.getGame().toJSON(), games;
-              if (game.player.length === 0) {
-                window.alert("Kein Spieler ausgewählt");
-                jQuery.mobile.silentScroll(0);
-                return;
-              }
-              games = this.load("games") || [];
-              if (this.currentGame === -1) {
-                games.push(game);
-              } else {
-                games[this.currentGame] = game;
-              }
-              this.store("games", games);
-              window.alert("Spiel gespeichert");
-              this.form.resetForm();
-              this.form.refreshForm();
-              if (this.currentGame === -1) {
-                jQuery.mobile.silentScroll(0);
-              } else {
-                window.history.back();
-              }
-            },
             deleteGame : function(gameNumber) {
               var games = this.load("games") || [];
               if (gameNumber < 0 || gameNumber >= games.length) {
@@ -160,10 +123,6 @@ define("Skat",
               }
               games.splice(gameNumber, 1);
               this.store("games", games);
-              return true;
-            },
-            removeGames : function() {
-              this.store("games", []);
               return true;
             },
             loadGame : function(gameNumber) {
@@ -175,30 +134,6 @@ define("Skat",
               this.forms.updateForm(new SkatGame(game));
               this.currentGame = gameNumber;
               return true;
-            },
-            addPlayer : function(playerName) {
-              var players = (this.load("players") || []), i;
-              for (i = 0; i < players.lenght; i++) {
-                if (players[i] === playerName) {
-                  return;
-                }
-              }
-              players.push(playerName);
-              players.sort();
-              this.store("players", players);
-            },
-            addGroup : function(groupName) {
-              var groups = (this.load("groups") || []), i;
-              for (i = 0; i < groups.lenght; i++) {
-                if (groups[i] === groupName) {
-                  return;
-                }
-              }
-              groups.push(groupName);
-              this.store("groups", groups);
-            },
-            setDbURL : function(url) {
-              this.store("dbURL", url);
             },
             downloadPlayer : function() {
               this.apiCall(this.api.players, function(players) {

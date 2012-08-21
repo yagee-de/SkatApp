@@ -207,6 +207,7 @@
                 <jsSourceFile>skatgame.js</jsSourceFile>
                 <jsSourceFile>skatgames.js</jsSourceFile>
                 <jsSourceFile>skatform.js</jsSourceFile>
+                <jsSourceFile>skatsettings.js</jsSourceFile>
                 <jsSourceFile>skat.js</jsSourceFile>
                 <jsSourceFile>skat-init.js</jsSourceFile>
               </jsSourceFiles>
