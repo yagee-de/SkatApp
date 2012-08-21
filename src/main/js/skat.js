@@ -44,6 +44,11 @@ define("Skat",
              * @description current game from localStore or '-1' for new game
              */
             currentGame : -1,
+            /**
+             * @memberOf Skat#
+             * @description logic for form page
+             * @type SkatForm
+             */
             form : null,
             /**
              * @memberOf Skat#
