@@ -198,17 +198,6 @@ define("SkatGame", [ "Class" ], function(Class) {
       return day[date.getDay()] + ", " + date.getDate() + ". " + month[date.getMonth()] + " " + date.getFullYear();
     },
     /**
-     * @description add info about this game to DOM
-     * @param {jQuery}
-     *          insert append info to these jQuery selected nodes
-     */
-    appendInfo : function(insert) {
-      insert.append("<h3>" + this.player + "</h3>");
-      insert.append("<p><strong>" + (this.won ? "Gewonnen" : "Verloren") + "</strong></p>");
-      insert.append("<p>" + (this.bid ? this.getGameTypeName() : "Ramsch") + " Punkte:" + this.getPoints() + "</p>");
-      insert.append('<p class="ui-li-aside"><strong>' + this.getTimeString() + "</strong></p>");
-    },
-    /**
      * @description calucaltes the points of this game
      * @type int
      */

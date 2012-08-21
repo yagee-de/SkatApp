@@ -16,8 +16,8 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("Skat",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm", "SkatGame" ],
-    function(jQuery, jqmInit, jqm, Class, SkatForm, SkatGame) {
+    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatForm", "SkatGame", "SkatGames" ],
+    function(jQuery, jqmInit, jqm, Class, SkatForm, SkatGame, SkatGames) {
       "use strict";
       var Skat = Class
           .extend(
@@ -26,6 +26,7 @@ define("Skat",
             /** @constructs */
             init : function() {
               this.form = new SkatForm(this);
+              this.games = new SkatGames(this);
             },
             /**
              * @memberOf Skat#
@@ -38,6 +39,12 @@ define("Skat",
              * @type SkatForm
              */
             form : null,
+            /**
+             * @memberOf Skat#
+             * @description logic for games page
+             * @type SkatGames
+             */
+            games : null,
             /**
              * @memberOf Skat#
              * @constant
@@ -101,25 +108,6 @@ define("Skat",
                 jQuery('<li class="group"/>').text(group).appendTo(groupList);
               });
               groupList.listview("refresh");
-            },
-            initGames : function() {
-              var list = jQuery("#gameList"), games = (this.load("games") || []), date = null;
-              list.empty();
-              jQuery.each(games, jQuery.proxy(function(i, value) {
-                var game = new SkatGame(value), curDate = game.getDateString(), li, link;
-                if (curDate !== date) {
-                  date = curDate;
-                  // <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
-                  list.append('<li data-role="list-divider">' + curDate + '</li>');
-                }
-                li = jQuery('<li/>');
-                li.addClass(value.won ? "won" : "lost");
-                link = jQuery('<a href="form.html" data-transition="slide" data-prepareGame="' + i + '"/>');
-                li.append(link);
-                game.appendInfo(link);
-                list.append(li);
-              }, this));
-              list.listview("refresh");
             },
             prepareGame : function(gameNumber) {
               this.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
