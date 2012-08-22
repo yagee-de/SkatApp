@@ -17,18 +17,19 @@
  */
 define("SkatGame", [ "Class" ], function(Class) {
   "use strict";
+  var month, day, bids, SkatGame;
   /**
    * @memberOf SkatGame
    * @constant
    * @description maps javascript month to names
    */
-  var month = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ],
+  month = [ "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember" ];
   /**
    * @memberOf SkatGame
    * @constant
    * @description maps javascript days to names
    */
-  day = [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sonnabend" ],
+  day = [ "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Sonnabend" ];
   /**
    * @memberOf SkatGame
    * @constant
@@ -36,7 +37,8 @@ define("SkatGame", [ "Class" ], function(Class) {
    */
   bids = [ 18, 20, 22, 23, 24, 27, 30, 33, 35, 36, 40, 44, 45, 46, 48, 50, 54, 55, 59, 60, 63, 66, 70, 72, 77, 80, 81, 84, 88, 90, 96, 99,
       100, 108, 110, 117, 120, 121, 126, 130, 132, 135, 140, 143, 144, 150, 153, 154, 156, 160, 162, 165, 168, 170, 176, 180, 187, 192,
-      198, 204, 216, 240, 264 ], SkatGame;
+      198, 204, 216, 240, 264 ];
+  
   SkatGame = Class.extend(
   /** @lends SkatGame.prototype */
   {

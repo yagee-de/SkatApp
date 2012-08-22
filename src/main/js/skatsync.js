@@ -15,8 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
-define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "SkatGame" ], function(jQuery, jqmInit, jqm, SkatStorage, SkatGame) {
+define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "SkatGame" ], function(jQuery, jqmInit, jqm, SkatStorage,
+                                                                                                  SkatGame) {
   "use strict";
+  var api, SkatSync;
   /**
    * @memberOf SkatSync
    * @constant
@@ -30,16 +32,17 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
    *              <dd>post games to SkatDB</dd>
    *              </dl>
    */
-  var api = {
+  api = {
     groups : "JSON/groups",
     players : "JSON/players",
     games : "JSON/games"
-  }, SkatSync = SkatStorage.extend(
+  };
+  SkatSync = SkatStorage.extend(
   /** @lends SkatSync.prototype */
   {
-    /** 
+    /**
      * @constructs
-     * @extends SkatStorage 
+     * @extends SkatStorage
      */
     init : function() {
     },
@@ -77,8 +80,10 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
     },
     /**
      * @description helper methods for GET requests to SkatDB
-     * @param {String} path relative path to SkatDB url
-     * @param {function} success function that should be called on success with requested json as parameter
+     * @param {String}
+     *          path relative path to SkatDB url
+     * @param {function}
+     *          success function that should be called on success with requested json as parameter
      */
     apiCall : function(path, success) {
       var dbURL = this.load("dbURL"), url, that = this;
@@ -104,7 +109,7 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
       });
     },
     /**
-     * @description transmits all local stored games to SkatDB 
+     * @description transmits all local stored games to SkatDB
      */
     uploadGames : function() {
       var dbURL = this.load("dbURL"), games, that = this;
