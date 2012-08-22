@@ -57,6 +57,11 @@ define("Skat",
              * @type SkatSync
              */
             sync : null,
+            /**
+             * @description handles events when clicked on links with 'data-preparegame' attributes
+             * @see SkatForm#prepareGame
+             * @param {Event} e the click event
+             */
             prepareGameHandler : function(e) {
               var game = parseInt(jQuery(e.currentTarget).attr("data-preparegame"), 10);
               this.form.prepareGame(game);

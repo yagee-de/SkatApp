@@ -34,8 +34,8 @@ define("SkatGame", [ "Class" ], function(Class) {
    * @constant
    * @description valid bid values
    */
-  bids = [ 18, 20, 22, 23, 24, 27, 30, 33, 35, 36, 40, 44, 45, 46, 48, 50, 54, 55, 59, 60, 63, 66, 70, 72, 77, 80, 81, 84, 88, 90, 96,
-      99, 100, 108, 110, 117, 120, 121, 126, 130, 132, 135, 140, 143, 144, 150, 153, 154, 156, 160, 162, 165, 168, 170, 176, 180, 187, 192,
+  bids = [ 18, 20, 22, 23, 24, 27, 30, 33, 35, 36, 40, 44, 45, 46, 48, 50, 54, 55, 59, 60, 63, 66, 70, 72, 77, 80, 81, 84, 88, 90, 96, 99,
+      100, 108, 110, 117, 120, 121, 126, 130, 132, 135, 140, 143, 144, 150, 153, 154, 156, 160, 162, 165, 168, 170, 176, 180, 187, 192,
       198, 204, 216, 240, 264 ], SkatGame;
   SkatGame = Class.extend(
   /** @lends SkatGame.prototype */
@@ -56,17 +56,65 @@ define("SkatGame", [ "Class" ], function(Class) {
         this.modified = new Date();
       }
     },
+    /**
+     * @field
+     * @type String
+     */
     group : null,
+    /**
+     * @field
+     * @type String
+     */
     player : null,
+    /**
+     * @field
+     * @type int
+     */
     bid : 0,
+    /**
+     * @field
+     * @type int
+     */
     gameLevel : 0,
+    /**
+     * @field
+     * @type Date
+     */
     createDate : 0,
+    /**
+     * @field
+     * @type Date
+     */
     modifydDate : 0,
+    /**
+     * @field
+     * @type int
+     */
     points : 0,
+    /**
+     * @field
+     * @type int
+     */
     jacks : 0,
+    /**
+     * @field
+     * @type int
+     */
     gameType : 0,
+    /**
+     * @field
+     * @type boolean
+     */
     hand : false,
+    /**
+     * @field
+     * @type boolean
+     */
     won : true,
+    /**
+     * @field
+     * @type int
+     */
     announcement : 1,
     /**
      * @description returns JSON representation of this game
@@ -165,6 +213,9 @@ define("SkatGame", [ "Class" ], function(Class) {
     isRamsch : function() {
       return this.bid === 0;
     },
+    /**
+     * @returns {String} name of this game type
+     */
     getGameTypeName : function() {
       switch (this.gameType) {
       case 9:
@@ -189,16 +240,26 @@ define("SkatGame", [ "Class" ], function(Class) {
         return "unbekannt";
       }
     },
+    /**
+     * @description translates {@link SkatGame#createDate} into human readable time
+     * @see SkatGame#getDateString
+     * @type String
+     */
     getTimeString : function() {
       var date = new Date(this.createDate);
       return (date.getHours() < 10 ? "0" : "") + date.getHours() + ":" + (date.getMinutes() < 10 ? "0" : "") + date.getMinutes();
     },
+    /**
+     * @description translates {@link SkatGame#createDate} into human readable date
+     * @see SkatGame#getTimeString
+     * @type String
+     */
     getDateString : function() {
       var date = new Date(this.createDate);
       return day[date.getDay()] + ", " + date.getDate() + ". " + month[date.getMonth()] + " " + date.getFullYear();
     },
     /**
-     * @description calucaltes the points of this game
+     * @description calculates the points of this game
      * @type int
      */
     getPoints : function() {
