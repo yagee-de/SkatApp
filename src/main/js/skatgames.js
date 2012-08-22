@@ -21,7 +21,10 @@ define("SkatGames", [ "jquery", "jqm-init", "jquery.mobile", "SkatGame", "SkatSt
   var SkatGames = SkatStorage.extend(
   /** @lends SkatGames.prototype */
   {
-    /** @constructs */
+    /** 
+     * @constructs
+     * @extends SkatStorage 
+     */
     init : function() {
     },
     /**

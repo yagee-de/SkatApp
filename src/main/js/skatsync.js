@@ -37,7 +37,10 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
   }, SkatSync = SkatStorage.extend(
   /** @lends SkatSync.prototype */
   {
-    /** @constructs */
+    /** 
+     * @constructs
+     * @extends SkatStorage 
+     */
     init : function() {
     },
     getExport : function() {

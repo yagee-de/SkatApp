@@ -23,18 +23,16 @@ define("Skat",
           .extend(
           /** @lends Skat.prototype */
           {
-            /** @constructs */
+            /** 
+             * @constructs
+             * @extends Class 
+             */
             init : function() {
               this.form = new SkatForm();
               this.games = new SkatGames();
               this.settings = new SkatSettings();
               this.sync = new SkatSync();
             },
-            /**
-             * @memberOf Skat#
-             * @description current game from localStore or '-1' for new game
-             */
-            currentGame : -1,
             /**
              * @memberOf Skat#
              * @description logic for form page
@@ -64,7 +62,7 @@ define("Skat",
               this.prepareGame(game);
             },
             prepareGame : function(gameNumber) {
-              this.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
+              this.form.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
               return false;
             }
           });

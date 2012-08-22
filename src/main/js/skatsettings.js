@@ -23,7 +23,10 @@ define("SkatSettings",
           .extend(
           /** @lends SkatSettings.prototype */
           {
-            /** @constructs */
+            /** 
+             * @constructs
+             * @extends SkatStorage 
+             */
             init : function() {
             },
             initSettings : function() {

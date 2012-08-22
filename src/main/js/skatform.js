@@ -23,11 +23,14 @@ define("SkatForm",
           .extend(
           /** @lends SkatForm.prototype */
           {
-            /** @constructs */
+            /** 
+             * @constructs
+             * @extends SkatStorage 
+             */
             init : function() {
             },
             /**
-             * @memberOf Skat#
+             * @memberOf SkatForm#
              * @description current game from localStore or '-1' for new game
              */
             currentGame : -1,

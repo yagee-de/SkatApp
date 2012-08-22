@@ -20,11 +20,14 @@ define("SkatStorage", [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGam
   var SkatStorage = Class.extend(
   /** @lends SkatStorage.prototype */
   {
-    /** @constructs */
+    /** 
+     * @constructs
+     * @extends Class 
+     */
     init : function() {
     },
     /**
-     * @memberOf Skat#
+     * @memberOf SkatStorage#
      * @constant
      * @description storage keys for localStorage
      *              <dl>
