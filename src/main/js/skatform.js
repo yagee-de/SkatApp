@@ -16,17 +16,15 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("SkatForm",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGame" ],
-    function(jQuery, jqmInit, jqm, Class, SkatGame) {
+    [ "jquery", "jqm-init", "jquery.mobile", "SkatGame", "SkatStorage" ],
+    function(jQuery, jqmInit, jqm, SkatGame, SkatStorage) {
       "use strict";
-      var SkatForm = Class
+      var SkatForm = SkatStorage
           .extend(
           /** @lends SkatForm.prototype */
           {
-            _skat : null,
             /** @constructs */
-            init : function(skatInstance) {
-              this._skat = skatInstance;
+            init : function() {
             },
             /**
              * @memberOf Skat#
@@ -47,7 +45,7 @@ define("SkatForm",
               });
             },
             initPlayers : function() {
-              var players = (this._skat.load("players") || []), playersSelector = "#player", option;
+              var players = (this.load("players") || []), playersSelector = "#player", option;
               jQuery(playersSelector).empty();
               option = jQuery('<option>').attr('selected', true);
               jQuery(playersSelector).append(option);
@@ -57,7 +55,7 @@ define("SkatForm",
               });
             },
             initGroups : function() {
-              var groups = (this._skat.load("groups") || []), groupsSelector = "#group";
+              var groups = (this.load("groups") || []), groupsSelector = "#group";
               jQuery(groupsSelector).empty();
               jQuery.each(groups, function(i, group) {
                 var option = jQuery('<option>').text(group).attr('value', group);
@@ -84,7 +82,7 @@ define("SkatForm",
                 jQuery("#formPage").children(":jqmData(role=header)").children("h1").text("Spiel anlegen");
                 return;
               }
-              var games = this._skat.load("games") || [], game;
+              var games = this.load("games") || [], game;
               if (gameNumber >= games.length) {
                 return;
               }
@@ -213,13 +211,13 @@ define("SkatForm",
                 jQuery.mobile.silentScroll(0);
                 return;
               }
-              games = this._skat.load("games") || [];
+              games = this.load("games") || [];
               if (this.currentGame === -1) {
                 games.push(game);
               } else {
                 games[this.currentGame] = game;
               }
-              this._skat.store("games", games);
+              this.store("games", games);
               window.alert("Spiel gespeichert");
               this.resetForm();
               this.refreshForm();

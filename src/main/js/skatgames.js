@@ -15,21 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
-define("SkatGames", [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGame" ], function(jQuery, jqmInit, jqm, Class, SkatGame) {
+define("SkatGames", [ "jquery", "jqm-init", "jquery.mobile", "SkatGame", "SkatStorage" ], function(jQuery, jqmInit, jqm, SkatGame,
+                                                                                                   SkatStorage) {
   "use strict";
-  var SkatGames = Class.extend(
+  var SkatGames = SkatStorage.extend(
   /** @lends SkatGames.prototype */
   {
-    _skat : null,
     /** @constructs */
-    init : function(skatInstance) {
-      this._skat = skatInstance;
+    init : function() {
     },
     /**
      * @description updates games site with a list of saved games
      */
     initGames : function() {
-      var list = jQuery("#gameList"), games = (this._skat.load("games") || []), date = null;
+      var list = jQuery("#gameList"), games = (this.load("games") || []), date = null;
       list.empty();
       jQuery.each(games, jQuery.proxy(function(i, value) {
         var game = new SkatGame(value), curDate = game.getDateString(), li, link;

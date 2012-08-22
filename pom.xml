@@ -205,9 +205,11 @@
                 <jsSourceFile>header.js</jsSourceFile>
                 <jsSourceFile>class.js</jsSourceFile>
                 <jsSourceFile>skatgame.js</jsSourceFile>
+                <jsSourceFile>skatstorage.js</jsSourceFile>
                 <jsSourceFile>skatgames.js</jsSourceFile>
                 <jsSourceFile>skatform.js</jsSourceFile>
                 <jsSourceFile>skatsettings.js</jsSourceFile>
+                <jsSourceFile>skatsync.js</jsSourceFile>
                 <jsSourceFile>skat.js</jsSourceFile>
                 <jsSourceFile>skat-init.js</jsSourceFile>
               </jsSourceFiles>

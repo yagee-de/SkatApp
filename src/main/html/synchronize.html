@@ -6,11 +6,11 @@
 <body>
   <div id="syncPage" data-role="dialog" data-dom-cache="true">
     <div data-role="content">
-      <button data-theme="d" data-icon="download-alt" onclick="skat.downloadPlayer()">Spieler
+      <button data-theme="d" data-icon="download-alt" onclick="skat.sync.downloadPlayer()">Spieler
         aktualisieren</button>
-      <button data-theme="d" data-icon="download-alt" onclick="skat.downloadGroups()">Skatrunden
+      <button data-theme="d" data-icon="download-alt" onclick="skat.sync.downloadGroups()">Skatrunden
         aktualisieren</button>
-      <button data-theme="c" data-icon="upload-alt" onclick="skat.uploadGames()">Spiele
+      <button data-theme="c" data-icon="upload-alt" onclick="skat.sync.uploadGames()">Spiele
         hochladen</button>
       <button data-theme="a" data-icon="remove" onclick="jQuery('#syncPage').dialog('close')">Schließen</button>
     </div>

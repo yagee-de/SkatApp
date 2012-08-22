@@ -16,21 +16,19 @@
  * along with SkatApp.  If not, see <http://www.gnu.org/licenses/>.
  */
 define("SkatSettings",
-    [ "jquery", "jqm-init", "jquery.mobile", "Class" ],
-    function(jQuery, jqmInit, jqm, Class) {
+    [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage" ],
+    function(jQuery, jqmInit, jqm, SkatStorage) {
       "use strict";
-      var SkatSettings = Class
+      var SkatSettings = SkatStorage
           .extend(
           /** @lends SkatSettings.prototype */
           {
-            _skat : null,
             /** @constructs */
-            init : function(skatInstance) {
-              this._skat = skatInstance;
+            init : function() {
             },
             initSettings : function() {
               // dbURL
-              var skatURL = this._skat.load("dbURL"), playerList = jQuery("#playerList"), players = (this._skat.load("players") || []), groupList = jQuery("#groupList"), groups = (this._skat
+              var skatURL = this.load("dbURL"), playerList = jQuery("#playerList"), players = (this.load("players") || []), groupList = jQuery("#groupList"), groups = (this
                   .load("groups") || []);
               jQuery("#dbURL").val(skatURL);
               // players
@@ -47,7 +45,7 @@ define("SkatSettings",
               groupList.listview("refresh");
             },
             addPlayer : function(playerName) {
-              var players = (this._skat.load("players") || []), i;
+              var players = (this.load("players") || []), i;
               for (i = 0; i < players.lenght; i++) {
                 if (players[i] === playerName) {
                   return;
@@ -55,27 +53,20 @@ define("SkatSettings",
               }
               players.push(playerName);
               players.sort();
-              this._skat.store("players", players);
+              this.store("players", players);
             },
             addGroup : function(groupName) {
-              var groups = (this._skat.load("groups") || []), i;
+              var groups = (this.load("groups") || []), i;
               for (i = 0; i < groups.lenght; i++) {
                 if (groups[i] === groupName) {
                   return;
                 }
               }
               groups.push(groupName);
-              this._skat.store("groups", groups);
+              this.store("groups", groups);
             },
             setDbURL : function(url) {
-              this._skat.store("dbURL", url);
-            },
-            removeGames : function() {
-              this._skat.store("games", []);
-              return true;
-            },
-            clearStorage : function() {
-              window.localStorage.clear();
+              this.store("dbURL", url);
             }
           });
       return SkatSettings;
