@@ -354,7 +354,6 @@
             <version>0.7</version>
             <inherited>false</inherited>
             <configuration>
-<!--               <jsDir>src/main/resources</jsDir> -->
               <includeUndocumented>true</includeUndocumented>
               <jsdocHome>${user.home}/jsdoc-toolkit</jsdocHome>
               <template>codeview</template>
@@ -457,6 +456,15 @@
                         <exclude>js/skat${combined.filename.suffix}.js</exclude>
                         <exclude>css/skat${combined.filename.suffix}.css</exclude>
                       </excludes>
+                    </resource>
+                    <resource>
+                      <!-- .nojekyll -->
+                      <file>${project.basedir}/pom.xml</file>
+                      <targetPath>${project.build.directory}/site</targetPath>
+                      <destFileName>.nojekyll</destFileName>
+                      <replace>
+                          <to><!-- Nothing --></to>
+                      </replace>
                     </resource>
                   </resources>
                 </configuration>
