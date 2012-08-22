@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Skat</title>
+		<title>JsDoc Reference - SkatSync</title>
 		<link href="../css/default.css" type="text/css" rel="stylesheet" media="all" />
 	</head>
 
@@ -55,26 +55,26 @@
 			<div class="innerContent">
 				<h1 class="classTitle">
 					
-					Class <span>Skat</span>
+					Class <span>SkatSync</span>
 				</h1>
 
 				<p class="description summary">
 					
 					
 					<br />Extends
-						<a href="../symbols/Class.html">Class</a>.<br />
+						<a href="../symbols/SkatStorage.html">SkatStorage</a>.<br />
 					
 				
 					
 					
 					
-						<br /><em>Defined in: </em> <a href="../symbols/src/_home_thosch_workspace_SkatApp_src_main_js_skat.js.html">skat.js</a>.
+						<br /><em>Defined in: </em> <a href="../symbols/src/_home_thosch_workspace_SkatApp_src_main_js_skatsync.js.html">skatsync.js</a>.
 					
 				</p>
 
 				
 					<div class="props">
-						<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Skat.">
+						<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class SkatSync.">
 							<caption>Class Summary</caption>
 							<thead>
 								<tr>
@@ -87,7 +87,7 @@
 									<td class="attributes">&nbsp;</td>
 									<td class="nameDescription" >
 										<div class="fixedFont">
-											<b><a href="../symbols/Skat.html#constructor">Skat</a></b>()
+											<b><a href="../symbols/SkatSync.html#constructor">SkatSync</a></b>()
 										</div>
 										<div class="description"></div>
 									</td>
@@ -100,67 +100,10 @@
 				
 					
 					
-						<div class="props">
-							<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Skat.">
-								<caption>Field Summary</caption>
-								
-								<thead>
-									<tr>
-										<th scope="col">Field Attributes</th>
-										<th scope="col">Field Name and Description</th>
-									</tr>
-								</thead>
-								
-								<tbody>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#form">form</a></b>
-												</div>
-												<div class="description">logic for form page</div>
-											</td>
-										</tr>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#games">games</a></b>
-												</div>
-												<div class="description">logic for games page</div>
-											</td>
-										</tr>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#settings">settings</a></b>
-												</div>
-												<div class="description">logic for settings page</div>
-											</td>
-										</tr>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#sync">sync</a></b>
-												</div>
-												<div class="description">logic for sync page</div>
-											</td>
-										</tr>
-									
-								</tbody>
-							</table>
-						</div>
-					
 					
 					
 						<dl class="inheritsList">
-						
+						<dt>Fields borrowed from class <a href="../symbols/SkatStorage.html">SkatStorage</a>: </dt><dd><a href="../symbols/SkatStorage.html#storage">storage</a></dd>
 						</dl>
 					
 				
@@ -172,7 +115,7 @@
 					
 					
 						<div class="props">
-							<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Skat.">
+							<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class SkatSync.">
 								<caption>Method Summary</caption>
 								
 								<thead>
@@ -187,9 +130,45 @@
 										<tr>
 											<td class="attributes">&nbsp;</td>
 											<td class="nameDescription">
-												<div class="fixedFont"><b><a href="../symbols/Skat.html#prepareGameHandler">prepareGameHandler</a></b>(e)
+												<div class="fixedFont"><b><a href="../symbols/SkatSync.html#apiCall">apiCall</a></b>(path, success)
 												</div>
-												<div class="description">handles events when clicked on links with 'data-preparegame' attributes</div>
+												<div class="description">helper methods for GET requests to SkatDB</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatSync.html#downloadGroups">downloadGroups</a></b>()
+												</div>
+												<div class="description">downloads groups from SkatDB and overwrites list in local storage</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatSync.html#downloadPlayer">downloadPlayer</a></b>()
+												</div>
+												<div class="description">downloads players from SkatDB and overwrites list in local storage</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatSync.html#getExport">getExport</a></b>()
+												</div>
+												<div class="description">generated exportable JSON object of all stored games</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatSync.html#uploadGames">uploadGames</a></b>()
+												</div>
+												<div class="description">transmits all local stored games to SkatDB</div>
 											</td>
 										</tr>
 									
@@ -200,7 +179,7 @@
 					
 					
 						<dl class="inheritsList">
-						
+						<dt>Methods borrowed from class <a href="../symbols/SkatStorage.html">SkatStorage</a>: </dt><dd><a href="../symbols/SkatStorage.html#clearStorage">clearStorage</a>, <a href="../symbols/SkatStorage.html#deleteGame">deleteGame</a>, <a href="../symbols/SkatStorage.html#load">load</a>, <a href="../symbols/SkatStorage.html#removeGames">removeGames</a>, <a href="../symbols/SkatStorage.html#store">store</a></dd>
 						</dl>
 					
 				
@@ -223,7 +202,7 @@
 							</div>
 							
 							<div class="fixedFont">
-								<b>Skat</b>()
+								<b>SkatSync</b>()
 							</div>
 							
 							<div class="description">
@@ -244,117 +223,6 @@
 	#### FIELD DETAILS
 	-->
 				
-					<div class="details props">
-						<div class="innerProps">
-
-							<div class="sectionTitle">
-								Field Detail
-							</div>
-							
-							
-								<a name="form"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatForm.html">SkatForm</a>}</span>
-									
-									<b>form</b>							
-								</div>
-								
-								<div class="description">
-									logic for form page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								<div class="hr"></div>
-							
-								<a name="games"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatGames.html">SkatGames</a>}</span>
-									
-									<b>games</b>							
-								</div>
-								
-								<div class="description">
-									logic for games page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								<div class="hr"></div>
-							
-								<a name="settings"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatSettings.html">SkatSettings</a>}</span>
-									
-									<b>settings</b>							
-								</div>
-								
-								<div class="description">
-									logic for settings page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								<div class="hr"></div>
-							
-								<a name="sync"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatSync.html">SkatSync</a>}</span>
-									
-									<b>sync</b>							
-								</div>
-								
-								<div class="description">
-									logic for sync page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								
-							
-						</div>
-					</div>
-				
 
 	<!--
 	#### METHOD DETAILS
@@ -367,7 +235,7 @@
 							</div>
 							
 							
-								<a name="prepareGameHandler"></a>
+								<a name="apiCall"></a>
 								
 								<div class="fixedFont heading">
 									<span class='lighter'>
@@ -376,11 +244,11 @@
 									
 									
 									
-									<b>prepareGameHandler</b>(e)
+									<b>apiCall</b>(path, success)
 								</div>
 								
 								<div class="description">
-									handles events when clicked on links with 'data-preparegame' attributes
+									helper methods for GET requests to SkatDB
 									
 									
 									
@@ -394,12 +262,102 @@
 										<dt class="heading">Parameters:</dt>
 										
 											<dt>
-												<span class="light fixedFont">{Event}</span> <b>e</b>
+												<span class="light fixedFont">{String}</span> <b>path</b>
 												
 											</dt>
-											<dd>the click event</dd>
+											<dd>relative path to SkatDB url</dd>
+										
+											<dt>
+												<span class="light fixedFont">{function}</span> <b>success</b>
+												
+											</dt>
+											<dd>function that should be called on success with requested json as parameter</dd>
 										
 									</dl>
+								
+								
+								
+
+								<div class="hr"></div>
+							
+								<a name="downloadGroups"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									
+									
+									<b>downloadGroups</b>()
+								</div>
+								
+								<div class="description">
+									downloads groups from SkatDB and overwrites list in local storage
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
+								
+
+								<div class="hr"></div>
+							
+								<a name="downloadPlayer"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									
+									
+									<b>downloadPlayer</b>()
+								</div>
+								
+								<div class="description">
+									downloads players from SkatDB and overwrites list in local storage
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
+								
+
+								<div class="hr"></div>
+							
+								<a name="getExport"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									<span class="light">{Array}</span>
+									
+									<b>getExport</b>()
+								</div>
+								
+								<div class="description">
+									generated exportable JSON object of all stored games
+									
+									
+									
+									
+								</div>
+								
+								
+								
 								
 								
 								
@@ -412,17 +370,45 @@
 										
 										
 										
-										
-										
-										
-										
-											<dt class="heading">See:</dt>
+											<dt class="heading">Returns:</dt>
 											
-												<dd><a href="../symbols/SkatForm.html#prepareGame">SkatForm#prepareGame</a></dd>
+												<dd><span class="light fixedFont">{Array}</span> of games</dd>
 											
+										
+										
+										
+										
 										
 									
 									</dl>
+								
+
+								<div class="hr"></div>
+							
+								<a name="uploadGames"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									
+									
+									<b>uploadGames</b>()
+								</div>
+								
+								<div class="description">
+									transmits all local stored games to SkatDB
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
 								
 
 								

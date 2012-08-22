@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Class</title>
+		<title>JsDoc Reference - SkatGames</title>
 		<link href="../css/default.css" type="text/css" rel="stylesheet" media="all" />
 	</head>
 
@@ -55,24 +55,26 @@
 			<div class="innerContent">
 				<h1 class="classTitle">
 					
-					Class <span>Class</span>
+					Class <span>SkatGames</span>
 				</h1>
 
 				<p class="description summary">
 					
 					
+					<br />Extends
+						<a href="../symbols/SkatStorage.html">SkatStorage</a>.<br />
 					
 				
-					allows to make object oriented class hierarchies
 					
 					
-						<br /><em>Defined in: </em> <a href="../symbols/src/_home_thosch_workspace_SkatApp_src_main_js_class.js.html">class.js</a>.
+					
+						<br /><em>Defined in: </em> <a href="../symbols/src/_home_thosch_workspace_SkatApp_src_main_js_skatgames.js.html">skatgames.js</a>.
 					
 				</p>
 
 				
 					<div class="props">
-						<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Class.">
+						<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class SkatGames.">
 							<caption>Class Summary</caption>
 							<thead>
 								<tr>
@@ -85,7 +87,7 @@
 									<td class="attributes">&nbsp;</td>
 									<td class="nameDescription" >
 										<div class="fixedFont">
-											<b><a href="../symbols/Class.html#constructor">Class</a></b>()
+											<b><a href="../symbols/SkatGames.html#constructor">SkatGames</a></b>()
 										</div>
 										<div class="description"></div>
 									</td>
@@ -96,6 +98,15 @@
 				
 
 				
+					
+					
+					
+					
+						<dl class="inheritsList">
+						<dt>Fields borrowed from class <a href="../symbols/SkatStorage.html">SkatStorage</a>: </dt><dd><a href="../symbols/SkatStorage.html#storage">storage</a></dd>
+						</dl>
+					
+				
 
 	<!--
 	#### METHODS SUMMARY
@@ -104,7 +115,7 @@
 					
 					
 						<div class="props">
-							<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Class.">
+							<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class SkatGames.">
 								<caption>Method Summary</caption>
 								
 								<thead>
@@ -117,11 +128,20 @@
 								<tbody>
 									
 										<tr>
-											<td class="attributes">&lt;static&gt; &nbsp;</td>
+											<td class="attributes">&nbsp;</td>
 											<td class="nameDescription">
-												<div class="fixedFont">Class.<b><a href="../symbols/Class.html#.extend">extend</a></b>(prop)
+												<div class="fixedFont"><b><a href="../symbols/SkatGames.html#appendInfo">appendInfo</a></b>(game, insert)
 												</div>
-												<div class="description"></div>
+												<div class="description">add info about this game to DOM</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatGames.html#initGames">initGames</a></b>()
+												</div>
+												<div class="description">updates games site with a list of saved games</div>
 											</td>
 										</tr>
 									
@@ -130,6 +150,10 @@
 						</div>
 					
 					
+					
+						<dl class="inheritsList">
+						<dt>Methods borrowed from class <a href="../symbols/SkatStorage.html">SkatStorage</a>: </dt><dd><a href="../symbols/SkatStorage.html#clearStorage">clearStorage</a>, <a href="../symbols/SkatStorage.html#deleteGame">deleteGame</a>, <a href="../symbols/SkatStorage.html#load">load</a>, <a href="../symbols/SkatStorage.html#removeGames">removeGames</a>, <a href="../symbols/SkatStorage.html#store">store</a></dd>
+						</dl>
 					
 				
 				
@@ -151,7 +175,7 @@
 							</div>
 							
 							<div class="fixedFont">
-								<b>Class</b>()
+								<b>SkatGames</b>()
 							</div>
 							
 							<div class="description">
@@ -184,20 +208,20 @@
 							</div>
 							
 							
-								<a name=".extend"></a>
+								<a name="appendInfo"></a>
 								
 								<div class="fixedFont heading">
 									<span class='lighter'>
-									&lt;static&gt; 
+									
 									</span>
 									
 									
 									
-									<span class="light">Class.</span><b>extend</b>(prop)
+									<b>appendInfo</b>(game, insert)
 								</div>
 								
 								<div class="description">
-									
+									add info about this game to DOM
 									
 									
 									
@@ -211,35 +235,48 @@
 										<dt class="heading">Parameters:</dt>
 										
 											<dt>
-												<span class="light fixedFont">{Object}</span> <b>prop</b>
+												<span class="light fixedFont">{<a href="../symbols/SkatGame.html">SkatGame</a>}</span> <b>game</b>
 												
 											</dt>
-											<dd>Object with properties attached to prototype</dd>
+											<dd>SkatGame instance</dd>
+										
+											<dt>
+												<span class="light fixedFont">{jQuery}</span> <b>insert</b>
+												
+											</dt>
+											<dd>append info to these jQuery selected nodes</dd>
 										
 									</dl>
 								
 								
 								
-									<dl class="detailList nomargin">
+
+								<div class="hr"></div>
+							
+								<a name="initGames"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
 									
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-											<dt class="heading">See:</dt>
-											
-												<dd><a href="http://ejohn.org/blog/simple-javascript-inheritance/">authors site</a></dd>
-											
-										
+									</span>
 									
-									</dl>
+									
+									
+									<b>initGames</b>()
+								</div>
+								
+								<div class="description">
+									updates games site with a list of saved games
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
 								
 
 								

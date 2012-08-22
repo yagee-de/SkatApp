@@ -4,7 +4,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Skat</title>
+		<title>JsDoc Reference - SkatStorage</title>
 		<link href="../css/default.css" type="text/css" rel="stylesheet" media="all" />
 	</head>
 
@@ -55,7 +55,7 @@
 			<div class="innerContent">
 				<h1 class="classTitle">
 					
-					Class <span>Skat</span>
+					Class <span>SkatStorage</span>
 				</h1>
 
 				<p class="description summary">
@@ -68,13 +68,13 @@
 					
 					
 					
-						<br /><em>Defined in: </em> <a href="../symbols/src/_home_thosch_workspace_SkatApp_src_main_js_skat.js.html">skat.js</a>.
+						<br /><em>Defined in: </em> <a href="../symbols/src/_home_thosch_workspace_SkatApp_src_main_js_skatstorage.js.html">skatstorage.js</a>.
 					
 				</p>
 
 				
 					<div class="props">
-						<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Skat.">
+						<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class SkatStorage.">
 							<caption>Class Summary</caption>
 							<thead>
 								<tr>
@@ -87,7 +87,7 @@
 									<td class="attributes">&nbsp;</td>
 									<td class="nameDescription" >
 										<div class="fixedFont">
-											<b><a href="../symbols/Skat.html#constructor">Skat</a></b>()
+											<b><a href="../symbols/SkatStorage.html#constructor">SkatStorage</a></b>()
 										</div>
 										<div class="description"></div>
 									</td>
@@ -101,7 +101,7 @@
 					
 					
 						<div class="props">
-							<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Skat.">
+							<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class SkatStorage.">
 								<caption>Field Summary</caption>
 								
 								<thead>
@@ -114,42 +114,22 @@
 								<tbody>
 									
 										<tr>
-											<td class="attributes">&nbsp;</td>
+											<td class="attributes">&lt;constant&gt; &nbsp;</td>
 											<td class="nameDescription">
 												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#form">form</a></b>
+												<b><a href="../symbols/SkatStorage.html#storage">storage</a></b>
 												</div>
-												<div class="description">logic for form page</div>
-											</td>
-										</tr>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#games">games</a></b>
-												</div>
-												<div class="description">logic for games page</div>
-											</td>
-										</tr>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#settings">settings</a></b>
-												</div>
-												<div class="description">logic for settings page</div>
-											</td>
-										</tr>
-									
-										<tr>
-											<td class="attributes">&nbsp;</td>
-											<td class="nameDescription">
-												<div class="fixedFont">
-												<b><a href="../symbols/Skat.html#sync">sync</a></b>
-												</div>
-												<div class="description">logic for sync page</div>
+												<div class="description">storage keys for localStorage
+             <dl>
+             <dt>games:</dt>
+             <dd>uncommitted games</dd>
+             <dt>players:</dt>
+             <dd>all player names</dd>
+             <dt>groups:</dt>
+             <dd>all group names</dd>
+             <dt>dbURL:</dt>
+             <dd>URL do SkatDB server</dd>
+             </dl></div>
 											</td>
 										</tr>
 									
@@ -172,7 +152,7 @@
 					
 					
 						<div class="props">
-							<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Skat.">
+							<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class SkatStorage.">
 								<caption>Method Summary</caption>
 								
 								<thead>
@@ -187,9 +167,45 @@
 										<tr>
 											<td class="attributes">&nbsp;</td>
 											<td class="nameDescription">
-												<div class="fixedFont"><b><a href="../symbols/Skat.html#prepareGameHandler">prepareGameHandler</a></b>(e)
+												<div class="fixedFont"><b><a href="../symbols/SkatStorage.html#clearStorage">clearStorage</a></b>()
 												</div>
-												<div class="description">handles events when clicked on links with 'data-preparegame' attributes</div>
+												<div class="description">clear local storage (removing dbURL, games, players and groups)</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatStorage.html#deleteGame">deleteGame</a></b>(gameNumber)
+												</div>
+												<div class="description">deletes game with given number after user confirm</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatStorage.html#load">load</a></b>(storeKey)
+												</div>
+												<div class="description">load stored object from local storage</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatStorage.html#removeGames">removeGames</a></b>()
+												</div>
+												<div class="description">delete all stored games</div>
+											</td>
+										</tr>
+									
+										<tr>
+											<td class="attributes">&nbsp;</td>
+											<td class="nameDescription">
+												<div class="fixedFont"><b><a href="../symbols/SkatStorage.html#store">store</a></b>(storeKey, value)
+												</div>
+												<div class="description">save object to local storage</div>
 											</td>
 										</tr>
 									
@@ -223,7 +239,7 @@
 							</div>
 							
 							<div class="fixedFont">
-								<b>Skat</b>()
+								<b>SkatStorage</b>()
 							</div>
 							
 							<div class="description">
@@ -252,95 +268,30 @@
 							</div>
 							
 							
-								<a name="form"></a>
+								<a name="storage"></a>
 								
 								<div class="fixedFont heading">
 									<span class='lighter'>
-									
+									&lt;constant&gt; 
 									</span>
 									
-									<span class="light">{<a href="../symbols/SkatForm.html">SkatForm</a>}</span>
 									
-									<b>form</b>							
+									
+									<b>storage</b>							
 								</div>
 								
 								<div class="description">
-									logic for form page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								<div class="hr"></div>
-							
-								<a name="games"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatGames.html">SkatGames</a>}</span>
-									
-									<b>games</b>							
-								</div>
-								
-								<div class="description">
-									logic for games page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								<div class="hr"></div>
-							
-								<a name="settings"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatSettings.html">SkatSettings</a>}</span>
-									
-									<b>settings</b>							
-								</div>
-								
-								<div class="description">
-									logic for settings page
-									
-									
-									
-								</div>
-								
-								
-
-								
-								
-								<div class="hr"></div>
-							
-								<a name="sync"></a>
-								
-								<div class="fixedFont heading">
-									<span class='lighter'>
-									
-									</span>
-									
-									<span class="light">{<a href="../symbols/SkatSync.html">SkatSync</a>}</span>
-									
-									<b>sync</b>							
-								</div>
-								
-								<div class="description">
-									logic for sync page
+									storage keys for localStorage
+             <dl>
+             <dt>games:</dt>
+             <dd>uncommitted games</dd>
+             <dt>players:</dt>
+             <dd>all player names</dd>
+             <dt>groups:</dt>
+             <dd>all group names</dd>
+             <dt>dbURL:</dt>
+             <dd>URL do SkatDB server</dd>
+             </dl>
 									
 									
 									
@@ -367,7 +318,7 @@
 							</div>
 							
 							
-								<a name="prepareGameHandler"></a>
+								<a name="clearStorage"></a>
 								
 								<div class="fixedFont heading">
 									<span class='lighter'>
@@ -376,11 +327,39 @@
 									
 									
 									
-									<b>prepareGameHandler</b>(e)
+									<b>clearStorage</b>()
 								</div>
 								
 								<div class="description">
-									handles events when clicked on links with 'data-preparegame' attributes
+									clear local storage (removing dbURL, games, players and groups)
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
+								
+
+								<div class="hr"></div>
+							
+								<a name="deleteGame"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									
+									
+									<b>deleteGame</b>(gameNumber)
+								</div>
+								
+								<div class="description">
+									deletes game with given number after user confirm
 									
 									
 									
@@ -394,10 +373,49 @@
 										<dt class="heading">Parameters:</dt>
 										
 											<dt>
-												<span class="light fixedFont">{Event}</span> <b>e</b>
+												<span class="light fixedFont">{int}</span> <b>gameNumber</b>
 												
 											</dt>
-											<dd>the click event</dd>
+											<dd>number of game (counting from 0)</dd>
+										
+									</dl>
+								
+								
+								
+
+								<div class="hr"></div>
+							
+								<a name="load"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									<span class="light">{Object}</span>
+									
+									<b>load</b>(storeKey)
+								</div>
+								
+								<div class="description">
+									load stored object from local storage
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+									<dl class="detailList params">
+										<dt class="heading">Parameters:</dt>
+										
+											<dt>
+												<span class="light fixedFont">{String}</span> <b>storeKey</b>
+												
+											</dt>
+											<dd>key of object in local storage</dd>
 										
 									</dl>
 								
@@ -412,17 +430,90 @@
 										
 										
 										
-										
-										
-										
-										
-											<dt class="heading">See:</dt>
+											<dt class="heading">Returns:</dt>
 											
-												<dd><a href="../symbols/SkatForm.html#prepareGame">SkatForm#prepareGame</a></dd>
+												<dd><span class="light fixedFont">{Object}</span> </dd>
 											
+										
+										
+										
+										
 										
 									
 									</dl>
+								
+
+								<div class="hr"></div>
+							
+								<a name="removeGames"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									
+									
+									<b>removeGames</b>()
+								</div>
+								
+								<div class="description">
+									delete all stored games
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+								
+								
+
+								<div class="hr"></div>
+							
+								<a name="store"></a>
+								
+								<div class="fixedFont heading">
+									<span class='lighter'>
+									
+									</span>
+									
+									
+									
+									<b>store</b>(storeKey, value)
+								</div>
+								
+								<div class="description">
+									save object to local storage
+									
+									
+									
+									
+								</div>
+								
+								
+								
+								
+									<dl class="detailList params">
+										<dt class="heading">Parameters:</dt>
+										
+											<dt>
+												<span class="light fixedFont">{String}</span> <b>storeKey</b>
+												
+											</dt>
+											<dd>key of object in local storage</dd>
+										
+											<dt>
+												<span class="light fixedFont">{Object}</span> <b>value</b>
+												
+											</dt>
+											<dd>object to store</dd>
+										
+									</dl>
+								
+								
 								
 
 								
