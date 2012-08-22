@@ -65,16 +65,6 @@ define("SkatStorage", [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGam
       }
       return false;
     },
-    loadGame : function(gameNumber) {
-      var games = (this.load("games") || []), game;
-      if (gameNumber < 0 || gameNumber >= games.length) {
-        return false;
-      }
-      game = games[gameNumber];
-      this.forms.updateForm(new SkatGame(game));
-      this.currentGame = gameNumber;
-      return true;
-    },
     removeGames : function() {
       this._skat.store("games", []);
       return true;
