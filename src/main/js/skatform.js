@@ -31,10 +31,19 @@ define("SkatForm",
             },
             /**
              * @memberOf SkatForm#
+             * @type int
              * @description current game from localStore or '-1' for new game
              */
             currentGame : -1,
+            /**
+             * @field
+             * @type boolean
+             * @description if 'false' prevents {@link SkatForm#updateGameLevel} to refresh jquery mobile widgets
+             */
             createComplete : false,
+            /**
+             * @description initialize bid form element with every valid value (call this once on #formPage create)
+             */
             initBiddingValues : function() {
               var biddingSelector = '#bid';
               jQuery(biddingSelector).empty();
@@ -47,6 +56,9 @@ define("SkatForm",
                 jQuery(biddingSelector).append(option);
               });
             },
+            /**
+             * @description initialize players form element with every valid value (call this before displaying #formPage)
+             */
             initPlayers : function() {
               var players = (this.load("players") || []), playersSelector = "#player", option;
               jQuery(playersSelector).empty();
@@ -57,6 +69,9 @@ define("SkatForm",
                 jQuery(playersSelector).append(option);
               });
             },
+            /**
+             * @description initialize groups form element with every valid value (call this before displaying #formPage)
+             */
             initGroups : function() {
               var groups = (this.load("groups") || []), groupsSelector = "#group";
               jQuery(groupsSelector).empty();
@@ -68,6 +83,9 @@ define("SkatForm",
                 jQuery(groupsSelector).append(option);
               });
             },
+            /**
+             * @description initialize jacks form element with every valid value (call this once on #formPage create)
+             */
             initJacks : function() {
               var jacksSelector = "#jacks", i, option;
               jQuery(jacksSelector).empty();
@@ -79,10 +97,16 @@ define("SkatForm",
                 jQuery(jacksSelector).append(option);
               }
             },
+            /**
+             * @description acts as a setter for {@link SkatForm#currentGame}
+             */
             prepareGame : function(gameNumber) {
               this.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
-              return false;
-            }
+            },
+            /**
+             * @description uses data of specified stored {@link SkatGame} to fill form elements (run refreshForm after this)
+             * @see SkatForm#refreshForm  
+             */
             fillForm : function(gameNumber) {
               if (gameNumber < 0) {
                 jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").hide();
@@ -109,6 +133,9 @@ define("SkatForm",
               jQuery("#points").val(game.points ? game.points : 40);
               jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").show();
             },
+            /**
+             * @description resets this form element with reasonable defaults
+             */
             resetForm : function() {
               jQuery("#won").attr("checked", true);
               jQuery("#hand").attr("checked", false);
@@ -124,6 +151,9 @@ define("SkatForm",
               }
               jQuery("#points").val(40);
             },
+            /**
+             * @description refreshes jquery mobile widgets after form element values changed
+             */
             refreshForm : function() {
               jQuery("#won").checkboxradio("refresh");
               jQuery("#hand").checkboxradio("refresh");
@@ -136,10 +166,17 @@ define("SkatForm",
               jQuery("#announcement").selectmenu("refresh");
               jQuery("#points").slider("refresh");
             },
+            /**
+             * @description calculates score on current form element values and updates page
+             */
             updateScore : function() {
               var game = this.getGame(), gamePoints = game.getPoints();
               document.getElementById("p1").innerHTML = "Punkte: " + gamePoints;
             },
+            /**
+             * @description switches between Ramsch mode and normal game mode
+             * @param {HTMLElement} source bid select form element
+             */
             bidChange : function(source) {
               var bid = parseInt(source.value, 10);
               switch (bid) {
@@ -163,6 +200,9 @@ define("SkatForm",
               }
               this.updateGameLevel();
             },
+            /**
+             * @description updates game level element which depends on bid or hand play
+             */
             updateGameLevel : function() {
               if (parseInt(jQuery("#bid").val(), 10) === 0) {
                 document.getElementById("gameLevel").innerHTML = "<option value=-1>Normal</option><option value=-2>Jungfer (*-2)</option><option value=2>Durchmarsch (*2)</option>";
@@ -175,6 +215,10 @@ define("SkatForm",
                 jQuery("#gameLevel").selectmenu("refresh");
               }
             },
+            /**
+             * @description builds a {@link SkatGame} instance on current form element values
+             * @returns {SkatGame}
+             */
             getGame : function() {
               var group = jQuery("#group").val(), player = jQuery("#player").val(), bid = parseInt(jQuery("#bid").val(), 10), gamelevel = parseInt(jQuery("#gameLevel")
                   .val(),
@@ -233,17 +277,6 @@ define("SkatForm",
               } else {
                 window.history.back();
               }
-            },
-            updateForm : function(game) {
-              jQuery("#group").val(game.group).selectmenu("refresh");
-              jQuery("#player").val(game.player).selectmenu("refresh");
-              jQuery("#bid").val(game.bid).selectmenu("refresh");
-              jQuery("#jacks").val(game.jacks).selectmenu("refresh");
-              jQuery("#gameType").val(game.gameType).selectmenu("refresh");
-              jQuery("#hand").attr('checked', game.hand).checkboxradio("refresh");
-              jQuery("#gameLevel").val(game.gameLevel).selectmenu("refresh");
-              jQuery("#announcement").val(game.announcement).selectmenu("refresh");
-              jQuery("#won").attr('checked', game.won).checkboxradio("refresh");
             }
           });
       return SkatForm;

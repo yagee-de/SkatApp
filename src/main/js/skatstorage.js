@@ -47,12 +47,26 @@ define("SkatStorage", [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGam
       groups : "groups",
       dbURL : "dbURL"
     },
-    load : function(storeKey, value) {
+    /**
+     * @description load stored object from local storage
+     * @param {String} storeKey key of object in local storage
+     * @returns {Object}
+     */
+    load : function(storeKey) {
       return JSON.parse(window.localStorage.getItem(this.storage[storeKey]));
     },
+    /**
+     * @description save object to local storage
+     * @param {String} storeKey key of object in local storage
+     * @param {Object} value object to store
+     */
     store : function(storeKey, value) {
       window.localStorage.setItem(this.storage[storeKey], JSON.stringify(value));
     },
+    /**
+     * @description deletes game with given number after user confirm
+     * @param {int} gameNumber number of game (counting from 0)
+     */
     deleteGame : function(gameNumber) {
       var games = this.load("games") || [];
       if (gameNumber < 0 || gameNumber >= games.length) {
@@ -65,10 +79,16 @@ define("SkatStorage", [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGam
       }
       return false;
     },
+    /**
+     * @description delete all stored games
+     */
     removeGames : function() {
       this._skat.store("games", []);
       return true;
     },
+    /**
+     * @description clear local storage (removing dbURL, games, players and groups)
+     */
     clearStorage : function() {
       window.localStorage.clear();
     }

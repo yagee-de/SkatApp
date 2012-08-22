@@ -43,6 +43,10 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
      */
     init : function() {
     },
+    /**
+     * @description generated exportable JSON object of all stored games
+     * @returns {Array} of games
+     */
     getExport : function() {
       var games = this.load("games") || [];
       jQuery.each(games, function(i, game) {
@@ -51,6 +55,9 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
       });
       return games;
     },
+    /**
+     * @description downloads players from SkatDB and overwrites list in local storage
+     */
     downloadPlayer : function() {
       this.apiCall(api.players, function(players) {
         players.sort();
@@ -58,6 +65,9 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
         window.alert(players.length + " Spieler geladen.");
       });
     },
+    /**
+     * @description downloads groups from SkatDB and overwrites list in local storage
+     */
     downloadGroups : function() {
       this.apiCall(api.groups, function(groups) {
         groups.sort();
@@ -65,6 +75,11 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
         window.alert(groups.length + " Gruppen geladen.");
       });
     },
+    /**
+     * @description helper methods for GET requests to SkatDB
+     * @param {String} path relative path to SkatDB url
+     * @param {function} success function that should be called on success with requested json as parameter
+     */
     apiCall : function(path, success) {
       var dbURL = this.load("dbURL"), url, that = this;
       if (dbURL === null || dbURL.length === 0) {
@@ -88,6 +103,9 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
         }
       });
     },
+    /**
+     * @description transmits all local stored games to SkatDB 
+     */
     uploadGames : function() {
       var dbURL = this.load("dbURL"), games, that = this;
       if (dbURL === null || dbURL.length === 0) {

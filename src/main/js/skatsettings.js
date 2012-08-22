@@ -29,6 +29,9 @@ define("SkatSettings",
              */
             init : function() {
             },
+            /**
+             * @description initialize settings page with current stored values (call this before displaying #settingsPage)
+             */
             initSettings : function() {
               // dbURL
               var skatURL = this.load("dbURL"), playerList = jQuery("#playerList"), players = (this.load("players") || []), groupList = jQuery("#groupList"), groups = (this
@@ -47,6 +50,10 @@ define("SkatSettings",
               });
               groupList.listview("refresh");
             },
+            /**
+             * @description adds a player to local storage
+             * @param {String} playerName name of player
+             */
             addPlayer : function(playerName) {
               var players = (this.load("players") || []), i;
               for (i = 0; i < players.lenght; i++) {
@@ -58,6 +65,10 @@ define("SkatSettings",
               players.sort();
               this.store("players", players);
             },
+            /**
+             * @description adds a group to local storage
+             * @param {String} groupName name of group
+             */
             addGroup : function(groupName) {
               var groups = (this.load("groups") || []), i;
               for (i = 0; i < groups.lenght; i++) {
@@ -68,6 +79,11 @@ define("SkatSettings",
               groups.push(groupName);
               this.store("groups", groups);
             },
+            /**
+             * @description sets the URL to SkatDB in local storage
+             * @param {String} url URL to SkatDB
+             * @see <a href="https://github.com/Mewel/SkatDB">SkatDB project page</a>
+             */
             setDbURL : function(url) {
               this.store("dbURL", url);
             }
