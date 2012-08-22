@@ -36,7 +36,7 @@ define([ "jquery", "jqm-init", "jquery.mobile", "Skat" ], function(jQuery, jqmIn
   jQuery(document).delegate("#formPage", "pagebeforeshow", function(event, data) {
     skat.form.initPlayers();
     skat.form.initGroups();
-    skat.form.fillForm(skat.currentGame);
+    skat.form.fillForm(skat.form.currentGame);
     skat.form.refreshForm();
     skat.form.updateScore();
   });

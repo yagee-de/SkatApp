@@ -23,9 +23,9 @@ define("SkatForm",
           .extend(
           /** @lends SkatForm.prototype */
           {
-            /** 
+            /**
              * @constructs
-             * @extends SkatStorage 
+             * @extends SkatStorage
              */
             init : function() {
             },
@@ -105,10 +105,10 @@ define("SkatForm",
             },
             /**
              * @description uses data of specified stored {@link SkatGame} to fill form elements (run refreshForm after this)
-             * @see SkatForm#refreshForm  
+             * @see SkatForm#refreshForm
              */
             fillForm : function(gameNumber) {
-              if (gameNumber < 0) {
+              if (typeof gameNumber !== "number" || gameNumber < 0) {
                 jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").hide();
                 jQuery("#formPage").children(":jqmData(role=header)").children("h1").text("Spiel anlegen");
                 return;
@@ -175,7 +175,8 @@ define("SkatForm",
             },
             /**
              * @description switches between Ramsch mode and normal game mode
-             * @param {HTMLElement} source bid select form element
+             * @param {HTMLElement}
+             *          source bid select form element
              */
             bidChange : function(source) {
               var bid = parseInt(source.value, 10);
