@@ -79,6 +79,10 @@ define("SkatForm",
                 jQuery(jacksSelector).append(option);
               }
             },
+            prepareGame : function(gameNumber) {
+              this.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
+              return false;
+            }
             fillForm : function(gameNumber) {
               if (gameNumber < 0) {
                 jQuery("#deleteButton").parentsUntil("#inputForm", "div.ui-btn").hide();

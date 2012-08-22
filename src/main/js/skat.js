@@ -59,11 +59,7 @@ define("Skat",
             sync : null,
             prepareGameHandler : function(e) {
               var game = parseInt(jQuery(e.currentTarget).attr("data-preparegame"), 10);
-              this.prepareGame(game);
-            },
-            prepareGame : function(gameNumber) {
-              this.form.currentGame = typeof gameNumber === 'number' ? gameNumber : -1;
-              return false;
+              this.form.prepareGame(game);
             }
           });
       return Skat;
