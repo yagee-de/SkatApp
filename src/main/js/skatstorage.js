@@ -83,7 +83,7 @@ define("SkatStorage", [ "jquery", "jqm-init", "jquery.mobile", "Class", "SkatGam
      * @description delete all stored games
      */
     removeGames : function() {
-      this._skat.store("games", []);
+      this.store("games", []);
       return true;
     },
     /**
