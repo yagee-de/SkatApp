@@ -223,7 +223,7 @@ define("SkatGame", [ "Class" ], function(Class) {
       case 9:
         return "Schellen";
       case 10:
-        return "Herz";
+        return "Rot";
       case 11:
         return "Grün";
       case 12:
