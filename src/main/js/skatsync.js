@@ -138,10 +138,10 @@ define("SkatSync", [ "jquery", "jqm-init", "jquery.mobile", "SkatStorage", "Skat
           var uploaded = games.length, failedGames;
           if (json.handList) {
             failedGames = json.handList;
-            that._skat.store("games", failedGames);
+            that.store("games", failedGames);
             uploaded -= failedGames.length;
           } else {
-            that._skat.settings.removeGames();
+            that.removeGames();
           }
           window.alert(uploaded + " von " + games.length + " Spielen hochgeladen:\n" + json.msg);
         }
