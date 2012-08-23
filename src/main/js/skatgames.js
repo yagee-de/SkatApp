@@ -37,7 +37,6 @@ define("SkatGames", [ "jquery", "jqm-init", "jquery.mobile", "SkatGame", "SkatSt
         var game = new SkatGame(value), curDate = game.getDateString(), li, link;
         if (curDate !== date) {
           date = curDate;
-          // <li data-role="list-divider">Friday, October 8, 2010 <span class="ui-li-count">2</span></li>
           list.append('<li data-role="list-divider">' + curDate + '</li>');
         }
         li = jQuery('<li/>');
