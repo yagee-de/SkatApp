@@ -34,6 +34,12 @@
     <connection>scm:git:https://github.com/yagee-de/SkatApp.git</connection>
     <developerConnection>scm:git:https://github.com/yagee-de/SkatApp.git</developerConnection>
   </scm>
+  <distributionManagement>
+    <site>
+      <id>github.SkatApp.site.ssh</id>
+      <url>gitsite:git@github.com/yagee-de/SkatApp.git</url>
+    </site>
+  </distributionManagement>
   <developers>
     <developer>
       <name>Thomas Scheffler</name>
@@ -59,6 +65,28 @@
   </dependencies>
 
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-scm</artifactId>
+        <version>2.2</version>
+      </extension>
+      <extension>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-manager-plexus</artifactId>
+        <version>1.7</version>
+      </extension>
+      <extension>
+        <groupId>org.apache.maven.scm</groupId>
+        <artifactId>maven-scm-provider-gitexe</artifactId>
+        <version>1.7</version>
+      </extension>
+      <extension>
+        <groupId>com.github.stephenc.wagon</groupId>
+        <artifactId>wagon-gitsite</artifactId>
+        <version>0.4.1</version>
+      </extension>
+    </extensions>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
@@ -101,7 +129,7 @@
           <description>Official ${project.name} build of the ${project.version} release</description>
           <override>true</override>
           <includeAttached>true</includeAttached>
-          <server>github</server>
+          <server>github.SkatApp</server>
         </configuration>
         <executions>
           <execution>
@@ -109,23 +137,6 @@
               <goal>upload</goal>
             </goals>
             <phase>install</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.github.github</groupId>
-        <artifactId>site-maven-plugin</artifactId>
-        <version>0.7</version>
-        <configuration>
-          <message>Building site for ${project.version}</message>
-          <server>github</server>
-        </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>site</goal>
-            </goals>
-            <phase>post-site</phase>
           </execution>
         </executions>
       </plugin>
@@ -463,7 +474,8 @@
                       <targetPath>${project.build.directory}/site</targetPath>
                       <destFileName>.nojekyll</destFileName>
                       <replace>
-                          <to><!-- Nothing --></to>
+                        <to><!-- Nothing -->
+                        </to>
                       </replace>
                     </resource>
                   </resources>
