@@ -400,6 +400,9 @@
                   </excludes>
                 </fileSet>
               </realResources>
+              <abstractResources>
+                <string>./</string>
+              </abstractResources>
               <networkResources>
                 <string>*</string>
               </networkResources>
